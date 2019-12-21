@@ -1,5 +1,5 @@
-import FrontPage from './FrontPage'
 import About from './About'
+import FrontPage from './FrontPage'
 import Quizzes from './Quizzes'
 import Questions from './Questions'
 import Scores from './Scores'

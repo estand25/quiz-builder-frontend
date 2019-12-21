@@ -12,7 +12,7 @@ import{
     Scores,
     Preview,
     Build
-} from '../page/index'
+} from '../pages'
 
 import {
     BrowserRouter as Router,

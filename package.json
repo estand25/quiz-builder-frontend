@@ -12,7 +12,9 @@
   "scripts": {
     "create": "webpack",
     "start": "webpack-dev-server --open",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "NODE_ENV=test jest --coverage --coverageReporters=lcov",
+    "localcoverage": "jest --coverage --coverageReporters=lcov"
   },
   "repository": {
     "type": "git",
@@ -38,8 +40,10 @@
     "@babel/core": "^7.7.7",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
+    "@testing-library/react": "^9.4.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "coveralls": "^3.0.9",
     "css-loader": "^3.4.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
@@ -47,5 +51,27 @@
     "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
+      "<rootDir>/public/",
+      "<rootDir>/index.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "src/**/*.{js}",
+      "!src/**/__tests__/*.{js}"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
   }
 }
