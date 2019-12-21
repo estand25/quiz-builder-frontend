@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { LogIn } from '../components/section/account'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -12,6 +13,10 @@ const FrontPage = () => {
     return (
         <Wrapper>
             <div>Front Page</div>
+            <LogIn
+                Title={'Log-In'}
+                AcceptLblBtn={'Log-In'}
+            />
         </Wrapper>
     )
 }
