@@ -10,6 +10,7 @@ module.exports = {
     module: {
        rules: [
            {test : /\.(js)$/, use: 'babel-loader'},
+           {test : /\.(jsx)$/, use: 'babel-loader'},
            {test : /\.css$/, use: ['style-loader', 'css-loader']}
        ] 
     },
@@ -18,5 +19,10 @@ module.exports = {
         new HtmlWebpackPlugin ({
             template: 'public/index.html'
         })
-    ]
+    ],
+    resolve: {
+        extensions: [
+            ".ts",".tsx",".js",".jsx",".json"
+        ]
+    }
 }
