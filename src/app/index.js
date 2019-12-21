@@ -1,12 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
-class App extends React.Component {
-    render(){
-        return (
-            <div>Hello World</div>
-        )
-    }
+const App = () => {
+    return (
+        <div>Quiz Builder Front-End</div>
+    )
 }
 
 export default App;
