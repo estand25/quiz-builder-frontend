@@ -2,7 +2,7 @@ import React from 'react'
 
 import {
     NavBar
-} from '../components/index'
+} from '../components/nav'
 
 import{
     About,
