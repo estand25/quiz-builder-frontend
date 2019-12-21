@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import api from '../../../api'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -44,7 +45,7 @@ const LogIn = (props) => {
 
     return (
         <Wrapper>
-            <Title>{props.Title}</Title>
+            <Title>Log-In</Title>
             <Label>User Name:</Label>
             <Spacing>
                 <InputText
@@ -61,8 +62,8 @@ const LogIn = (props) => {
                     onChange={p => setPasssword(p.target.value)}
                 />
             </Spacing>
-            <Button onClick={props.onClick}>{props.AcceptLblBtn}</Button>
-            <CancelButton href={props.onCancel}>Cancel</CancelButton>
+            <Button onClick={props.onLogInOnClick}>Log-In</Button>
+            <CancelButton href={props.onLogInCancel}>Cancel</CancelButton>
         </Wrapper>
     )
 }

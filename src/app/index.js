@@ -11,7 +11,8 @@ import{
     Questions,
     Scores,
     Preview,
-    Build
+    Build,
+    LogInUser
 } from '../pages'
 
 import {
@@ -38,6 +39,7 @@ const App = () => {
                     <Route path="/score" exact component={Scores}/>
                     <Route path="/preview" exact component={Preview}/>
                     <Route path="/build" exact component={Build}/>
+                    <Route path="/logIn" exact component={LogInUser}/>
                 </Switch>
             </Router>
         </Provider>

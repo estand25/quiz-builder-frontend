@@ -5,6 +5,7 @@ import Questions from './Questions'
 import Scores from './Scores'
 import Preview from './Preview'
 import Build from './Build'
+import LogInUser from './LogInUser'
 
 export {
     About,
@@ -13,5 +14,6 @@ export {
     Questions,
     Scores,
     Preview,
-    Build
+    Build,
+    LogInUser
 }

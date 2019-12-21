@@ -13,10 +13,6 @@ const FrontPage = () => {
     return (
         <Wrapper>
             <div>Front Page</div>
-            <LogIn
-                Title={'Log-In'}
-                AcceptLblBtn={'Log-In'}
-            />
         </Wrapper>
     )
 }
