@@ -6,6 +6,7 @@ import Scores from './Scores'
 import Preview from './Preview'
 import Build from './Build'
 import LogInUser from './LogInUser'
+import LogOutUser from './LogOutUser'
 
 export {
     About,
@@ -15,5 +16,6 @@ export {
     Scores,
     Preview,
     Build,
-    LogInUser
+    LogInUser,
+    LogOutUser
 }

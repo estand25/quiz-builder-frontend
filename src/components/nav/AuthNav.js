@@ -9,12 +9,14 @@ const AuthNav = (props) => {
 
     if(aState.userId){
         return (
-            <div>LogIn</div>
+            <div>
+                <Link to='/logOut' className='nav-link'>Log-Out</Link>
+            </div>
         ) 
     } else {
         return (
             <div>
-                <Link to='logIn' className='nav-link'>Login</Link>
+                <Link to='/logIn' className='nav-link'>Log-In</Link>
             </div>
         )
     }
