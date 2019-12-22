@@ -12,8 +12,8 @@ const Wrapper = styled.div.attrs({
     border: 1px;
 `
 
-const Button = styled.button.attrs({
-    className: 'btn btn-primary',
+const SuccessButton = styled.button.attrs({
+    className: 'btn btn-success',
 })`
     margin: 15px 15px 15px 15px;
 `
@@ -49,7 +49,7 @@ const LogIn = (props) => {
 
     return (
         <Wrapper>
-            <Button onClick={logOutUser}>Log-Out</Button>
+            <SuccessButton onClick={logOutUser}>Log-Out</SuccessButton>
         </Wrapper>
     )
 }

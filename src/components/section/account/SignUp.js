@@ -42,44 +42,46 @@ const CancelButton = styled.button.attrs({
     margin: 15px 15px 15px 15px;
 `
 
-const LogIn = (props) => {
+const SignUp = (props) => {
     const [username, setUserName] = useState('')
     const [password, setPasssword] = useState('')
+    const [email, setEmail] = useState('')
+
     const sDispatch = useDispatch()
     const history = useHistory()
 
-    const signInUser = () => {
+    const signUpUser = () => {
         const payload = {
             username: username,
-            password: password
+            password: password,
+            email: email
         }
 
-        api.SignInUser(payload)
+        api.insertUser(payload)
             .then(res => {
                 if(res.data.success === true){
                     var user = res.data.data    
                     payload.userId = user._id
-                    payload.email = user.email
 
                     sDispatch(auth.setUser(payload))
 
-                    window.alert('User logged in successfully !!')
+                    window.alert('User sign-up successfully !!')
                     history.push('/about')
                 }
             }).catch(err => {
-                console.log('signInUser', err);
+                console.log('signUpUser', err);
                 window.alert(err)
             })
     }
 
-    const cancelSignIn = () => {
-        window.alert('User cancel logged in successfully !!')
+    const cancelSignUp = () => {
+        window.alert('User cancel sign up successfully !!')
         history.push('/about')
     }
 
     return (
         <Wrapper>
-            <Title>Log-In</Title>
+            <Title>Sign-Up</Title>
             <Label>User Name:</Label>
             <Spacing>
                 <InputText
@@ -96,10 +98,18 @@ const LogIn = (props) => {
                     onChange={p => setPasssword(p.target.value)}
                 />
             </Spacing>
-            <SuccessButton onClick={signInUser}>Log-In</SuccessButton>
-            <CancelButton onClick={cancelSignIn}>Cancel</CancelButton>
+            <Label>Email:</Label>
+            <Spacing>
+                <InputText
+                    type="text"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                />
+            </Spacing>
+            <SuccessButton onClick={signUpUser}>Sign-Up</SuccessButton>
+            <CancelButton onClick={cancelSignUp}>Cancel</CancelButton>
         </Wrapper>
     )
 }
 
-export default LogIn
+export default SignUp

@@ -1,21 +1,24 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import Link_ from '../../../src/components/nav/Link_'
+import SignUpUser from '../../../src/pages/account/SignUpUser'
 
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-describe('Link_ renders without crashing', () => {
-    it('Link_ does not crash on render', () => {
+describe('Sign Up User renders without crashing', () => {
+    it('Sign Up User does not crash on render', () => {
         const auth = {
             userId: '',
             userLoading: false,
-            error: ''
+            error: '',
+            email: '',
+            username: '',
+            password: ''
         }
-
-        const initialState = {
-            auth: auth 
+        
+        const initialState = { 
+            auth: auth
         }
 
         const mockStore = configureStore()
@@ -23,13 +26,13 @@ describe('Link_ renders without crashing', () => {
 
         store = mockStore(initialState)
 
-        const link_ = render(
+        const signUpUser = render(
             <Provider store={store}>
                 <Router>
-                    <Link_ />
+                    <SignUpUser />
                 </Router>
             </Provider>
         )
-        expect(link_).toBeTruthy()
+        expect(signUpUser).toBeTruthy()
     })
 })

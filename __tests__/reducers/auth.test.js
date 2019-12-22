@@ -8,7 +8,8 @@ describe('auth reducers with inital state', () => {
             userLoading: false,
             error: '',
             username: '',
-            password: ''
+            password: '',
+            email: ''
         }
         expect(auth_(undefined, {})).toEqual(initalState)
     })

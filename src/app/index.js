@@ -12,9 +12,14 @@ import{
     Scores,
     Preview,
     Build,
+} from '../pages/tabs'
+
+import{
     LogInUser,
-    LogOutUser
-} from '../pages'
+    LogOutUser,
+    ProfileUser,
+    SignUpUser
+} from '../pages/account'
 
 import {
     BrowserRouter as Router,
@@ -42,6 +47,8 @@ const App = () => {
                     <Route path="/build" exact component={Build}/>
                     <Route path="/logIn" exact component={LogInUser}/>
                     <Route path="/logOut" exact component={LogOutUser}/>
+                    <Route path="/profile" exact component={ProfileUser}/>
+                    <Route path="/signUp" exact component={SignUpUser}/>
                 </Switch>
             </Router>
         </Provider>

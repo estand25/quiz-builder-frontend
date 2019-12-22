@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { LogOut } from '../components/section/account'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -9,12 +8,12 @@ const Wrapper = styled.div.attrs({
     border: 1px;
 `
 
-const LogOutUser = () => {
+const FrontPage = () => {
     return (
         <Wrapper>
-            <LogOut />
+            <div>Front Page</div>
         </Wrapper>
     )
 }
 
-export default LogOutUser
+export default FrontPage

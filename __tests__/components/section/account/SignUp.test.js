@@ -1,33 +1,32 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import AuthNav from '../../../src/components/nav/AuthNav'
+import SignUp from '../../../../src/components/section/account/SignUp'
 
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-describe('AuthNav renders without crashing', () => {
-    it('AuthNav does not crash on render', () => {
-        const auth = {
+describe('SignUp renders without crashing', () => {
+    it('SignUp does not crash on render', () => {
+        const initialState = { 
             userId: '',
             userLoading: false,
-            error: ''
-        }
-
-        const initialState = {
-            auth: auth 
+            error: '',
+            email: ''
         }
 
         const mockStore = configureStore()
-        let store = mockStore(initialState)
-        
-        const authNav = render(
+        let store
+
+        store = mockStore(initialState)
+
+        const signUp = render(
             <Provider store={store}>
                 <Router>
-                    <AuthNav />
+                    <SignUp />
                 </Router>
             </Provider>
         )
-        expect(authNav).toBeTruthy()
+        expect(signUp).toBeTruthy()
     })
 })

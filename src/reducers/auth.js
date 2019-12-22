@@ -5,7 +5,8 @@ const initalState = {
     userLoading: false,
     error: '',
     username: '',
-    password: ''
+    password: '',
+    email: ''
 }
 
 export default (state = initalState, action ) => {
@@ -14,9 +15,10 @@ export default (state = initalState, action ) => {
             var a = {...state,
                 userId: action.payload.userId,
                 username: action.payload.username,
-                password: action.payload.password
+                password: action.payload.password,
+                email: action.payload.email
             }
-            // console.log('actions.SET_USER_ID', a);
+            console.log('actions.SET_USER_ID', a);
             
             return a
         default:

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { LogIn } from '../components/section/account'
+import { SignUp } from '../../components/section/account'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -9,12 +9,12 @@ const Wrapper = styled.div.attrs({
     border: 1px;
 `
 
-const FrontPage = () => {
+const SignUpUser = () => {
     return (
         <Wrapper>
-            <div>Front Page</div>
+            <SignUp />
         </Wrapper>
     )
 }
 
-export default FrontPage
+export default SignUpUser

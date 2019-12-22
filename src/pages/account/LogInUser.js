@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { LogIn } from '../components/section/account'
+import { LogIn } from '../../components/section/account'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
