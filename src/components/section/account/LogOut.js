@@ -36,33 +36,26 @@ const Button = styled.button.attrs({
     margin: 15px 15px 15px 15px;
 `
 
-const CancelButton = styled.button.attrs({
-    className: 'btn btn-danger',
-})`
-    margin: 15px 15px 15px 15px;
-`
-
 const LogIn = (props) => {
-    const [username, setUserName] = useState('')
-    const [password, setPasssword] = useState('')
     const sDispatch = useDispatch()
     const history = useHistory()
 
-    const createUser = () => {
+    const  logOutUser = () => {
         const payload = {
             username: username,
             password: password
         }
 
-        api.SignInUser(payload)
+        api.SignOutUser(payload)
             .then(res => {
-                if(res.data.success === true){
-                    var user = res.data.data    
-                    payload.userId = user._id
-
+                if(res.data.success === true){                    
+                    payload.userId = ''
+                    payload.username = ''
+                    payload.password = ''
+                    
                     sDispatch(auth.setUser(payload))
 
-                    window.alert('User logged in successfully !!')
+                    window.alert('User logged out in successfully !!')
                     history.push('/about')
                 }
             }).catch(err => {
@@ -73,25 +66,7 @@ const LogIn = (props) => {
 
     return (
         <Wrapper>
-            <Title>Log-In</Title>
-            <Label>User Name:</Label>
-            <Spacing>
-                <InputText
-                    type="text"
-                    value={username}
-                    onChange={un => setUserName(un.target.value)}
-                />
-            </Spacing>
-            <Label>Password:</Label>
-            <Spacing>
-                <InputText
-                    type="password"
-                    value={password}
-                    onChange={p => setPasssword(p.target.value)}
-                />
-            </Spacing>
-            <Button onClick={createUser}>Log-In</Button>
-            <CancelButton href={props.onLogInCancel}>Cancel</CancelButton>
+            <Button onClick={logOutUser}>Log-Out</Button>
         </Wrapper>
     )
 }
