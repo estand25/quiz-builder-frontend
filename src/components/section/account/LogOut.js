@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import api from '../../../api'
 import { auth } from '../../../actions'
@@ -12,24 +12,6 @@ const Wrapper = styled.div.attrs({
     border: 1px;
 `
 
-const Title = styled.h1.attrs({
-    className: 'h1',
-})``
-
-const Label = styled.label`
-    margin: 5px;
-`
-
-const InputText = styled.input.attrs({
-    className: 'form-control',
-})`
-    margin: 5px;
-`
-
-const Spacing = styled.div`
-    padding: 5px;
-`
-
 const Button = styled.button.attrs({
     className: 'btn btn-primary',
 })`
@@ -38,12 +20,13 @@ const Button = styled.button.attrs({
 
 const LogIn = (props) => {
     const sDispatch = useDispatch()
+    const cState = useSelector(state => state.auth)
     const history = useHistory()
 
     const  logOutUser = () => {
         const payload = {
-            username: username,
-            password: password
+            username: cState.username,
+            password: cState.password
         }
 
         api.SignOutUser(payload)
