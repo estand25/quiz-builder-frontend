@@ -19,20 +19,22 @@ export default (state = initalState, action ) => {
             var b = {...state,
                 userLoading: action.loading
             }
-            console.log('actions.GET_USER_ID_PENDING', b);
+            // console.log('actions.GET_USER_ID_PENDING', b);
             
             return b
         case actions.GET_USER_ID_FULLFILLED:
             var c = {...state,
-                userLoading: action.loading, userId: action.userId
+                userLoading: action.loading, userId: action.payload
             }
-            console.log('actions.GET_USER_ID_FULLFILLED', c);
+            // console.log('actions.GET_USER_ID_FULLFILLED', c);
 
             return c
         case actions.GET_USER_ID_REJECT:
             var d = {...state,
                 userLoading: action.loading, error: action.payload
             }
+            
+            return d
         default:
             return state
     }
