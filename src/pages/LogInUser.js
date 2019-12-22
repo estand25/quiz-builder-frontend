@@ -9,12 +9,12 @@ const Wrapper = styled.div.attrs({
     border: 1px;
 `
 
-const FrontPage = () => {
+const LogInUser = () => {
     return (
         <Wrapper>
-            <div>Front Page</div>
+            <LogIn />
         </Wrapper>
     )
 }
 
-export default FrontPage
+export default LogInUser

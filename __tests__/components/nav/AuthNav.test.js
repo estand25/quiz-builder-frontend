@@ -1,13 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import NavBar from '../../../src/components/nav/NavBar'
+import AuthNav from '../../../src/components/nav/AuthNav'
 
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-describe('NavBar renders without crashing', () => {
-    it('NavBar does not crash on render', () => {
+describe('AuthNav renders without crashing', () => {
+    it('AuthNav does not crash on render', () => {
         const initialState = { 
             userId: '',
             userLoading: false,
@@ -16,13 +16,13 @@ describe('NavBar renders without crashing', () => {
         const mockStore = configureStore()
         let store = mockStore(initialState)
         
-        const navBar = render(
+        const authNav = render(
             <Provider store={store}>
                 <Router>
-                    <NavBar />
+                    <AuthNav />
                 </Router>
             </Provider>
         )
-        expect(navBar).toBeTruthy()
+        expect(authNav).toBeTruthy()
     })
 })

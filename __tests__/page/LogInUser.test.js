@@ -1,28 +1,31 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import NavBar from '../../../src/components/nav/NavBar'
+import LogInUser from '../../src/pages/LogInUser'
 
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
-describe('NavBar renders without crashing', () => {
-    it('NavBar does not crash on render', () => {
+describe('Log In User renders without crashing', () => {
+    it('Log In User does not crash on render', () => {
         const initialState = { 
             userId: '',
             userLoading: false,
             error: ''
         }
+
         const mockStore = configureStore()
-        let store = mockStore(initialState)
-        
-        const navBar = render(
+        let store
+
+        store = mockStore(initialState)
+
+        const logInUser = render(
             <Provider store={store}>
                 <Router>
-                    <NavBar />
+                    <LogInUser />
                 </Router>
             </Provider>
         )
-        expect(navBar).toBeTruthy()
+        expect(logInUser).toBeTruthy()
     })
 })

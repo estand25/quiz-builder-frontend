@@ -1,0 +1,11 @@
+const actions = {
+    SET_USER_ID: 'SET_USER_ID',
+
+    GET_USER_ID_PENDING: 'GET_USER_ID_PENDING',
+    GET_USER_ID_FULLFILLED: 'GET_USER_ID_FULLFILLED',
+    GET_USER_ID_REJECT: 'GET_USER_ID_REJECT'
+}
+
+export {
+    actions
+}
