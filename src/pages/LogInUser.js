@@ -12,7 +12,7 @@ const Wrapper = styled.div.attrs({
 const LogInUser = () => {
     return (
         <Wrapper>
-            <LogIn/>
+            <LogIn />
         </Wrapper>
     )
 }

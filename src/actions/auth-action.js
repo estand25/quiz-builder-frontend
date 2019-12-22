@@ -1,7 +1,8 @@
 import { actions } from './type'
 
 export const setUserId = userId => ({
-    type: actions.SET_USER_ID
+    type: actions.SET_USER_ID,
+    userId
 })
 
 export const GetUserId = (bool) => ({

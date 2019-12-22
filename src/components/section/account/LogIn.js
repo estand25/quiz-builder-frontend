@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import api from '../../../api'
+import { auth } from '../../../actions'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -42,6 +45,28 @@ const CancelButton = styled.button.attrs({
 const LogIn = (props) => {
     const [username, setUserName] = useState('')
     const [password, setPasssword] = useState('')
+    const sDispatch = useDispatch()
+    const history = useHistory()
+
+    const createUser = () => {
+        const payload = {
+            username: username,
+            password: password
+        }
+
+        api.SignInUser(payload)
+            .then(res => {
+                if(res.data.success === true){
+                    var user = res.data.data                    
+                    sDispatch(auth.setUserId(user._id))
+                    window.alert('User Logged in successfully !!')
+                    history.push('/about')
+                }
+            }).catch(err => {
+                console.log('SignInUser', err);
+                window.alert(err)
+            })
+    }
 
     return (
         <Wrapper>
@@ -62,7 +87,7 @@ const LogIn = (props) => {
                     onChange={p => setPasssword(p.target.value)}
                 />
             </Spacing>
-            <Button onClick={props.onLogInOnClick}>Log-In</Button>
+            <Button onClick={createUser}>Log-In</Button>
             <CancelButton href={props.onLogInCancel}>Cancel</CancelButton>
         </Wrapper>
     )

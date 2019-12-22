@@ -12,7 +12,7 @@ export default (state = initalState, action ) => {
             var a = {...state,
                 userId: action.userId
             }
-            console.log('actions.SET_USER_ID', a);
+            // console.log('actions.SET_USER_ID', a);
             
             return a
         case actions.GET_USER_ID_PENDING:

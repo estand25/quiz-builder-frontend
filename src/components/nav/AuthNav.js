@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 const AuthNav = (props) => {
     const aState = useSelector(state => state)
 
-    if(aState.userLoading){
+    console.log('AuthNav', aState);
+
+    if(aState.userId){
         return (
             <div>LogIn</div>
         ) 
