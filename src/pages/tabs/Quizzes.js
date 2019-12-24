@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { AddQuiz } from '../../components/section/quiz'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -11,7 +12,9 @@ const Wrapper = styled.div.attrs({
 const Quizzes = () => {
     return (
         <Wrapper>
-            <div>Quizzes</div>
+            <AddQuiz
+                AddObjectName={'Quiz'}
+            />
         </Wrapper>
     )
 }
