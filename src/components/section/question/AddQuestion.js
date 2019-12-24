@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import AddObj from '../modals/AddObj'
-import { question } from '../../../actions'
 import { useDispatch } from 'react-redux'
 
+import { AddObj, ListObj } from '../modals'
+import { question } from '../../../actions'
+
 import api from '../../../api'
+
+import { ItemQuestion } from '../question'
 
 const AddQuestion = (props) => {
     const qDispatch = useDispatch()
@@ -11,9 +14,23 @@ const AddQuestion = (props) => {
 
     useEffect(
         () => {
-            api.getAllQuiz()
+            api.getAllQuestion()
                 .then(q => {
-                    setQuestions(q.data.data)
+                    if(q.data.success === true){
+                        var question = q.data.data.map(i => (
+                            {
+                                _id: i._id,
+                                question: i.question,
+                                answer: i.answer,
+                                options: i.options,
+                                status: i.status == 1 ? 'On' : 'Off',
+                                order: i.order,
+                                point: i.point
+                            }
+                        ))                        
+
+                        setQuestions(question)
+                    }
                 })
         }
     )
@@ -28,10 +45,16 @@ const AddQuestion = (props) => {
     }
 
     return (
-        <AddObj
-            AddObjectName={props.AddObjectName}
-            onAddHandle={handleAddQuestion}
-        />
+        <div>
+            <AddObj
+                AddObjectName={props.AddObjectName}
+                onAddHandle={handleAddQuestion}
+            />
+            <ListObj
+                list={questions}
+                template={ItemQuestion}
+            />
+        </div>
     )
 }
 
