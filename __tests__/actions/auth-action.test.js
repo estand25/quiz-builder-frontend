@@ -6,7 +6,8 @@ describe('User set', () => {
         var payload = {
             userId: '123456789',
             username: 'd1',
-            password: 'd1w'
+            password: 'd1w',
+            email: ''
         }
 
         const expectAction = {
@@ -21,7 +22,8 @@ describe('User set', () => {
         var payload = {
             userId: '',
             username: '',
-            password: ''
+            password: '',
+            email: ''
         }
         
         const expectAction = {
