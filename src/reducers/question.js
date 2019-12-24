@@ -11,7 +11,8 @@ const initialState = {
     point: 0,
     order: 0,
     status: '',
-    questions: 0    
+    questions: 0,    
+    questionCount: 0
 }
 
 export default (state = initialState, action) => {
