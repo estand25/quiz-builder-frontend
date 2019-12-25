@@ -8,7 +8,7 @@ import api from '../../../api'
 
 import { ItemQuestion } from '.'
 
-const QuestionSection = (props) => {
+const SectionQuestion = (props) => {
     const qDispatch = useDispatch()
     const [questions, setQuestions] = useState([])
 
@@ -58,4 +58,4 @@ const QuestionSection = (props) => {
     )
 }
 
-export default QuestionSection
+export default SectionQuestion

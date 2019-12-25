@@ -7,7 +7,7 @@ import { quiz } from '../../../actions'
 import api from '../../../api'
 import { ItemQuiz } from '.'
 
-const QuizSection = (props) => {
+const SectionQuiz = (props) => {
     const qDispatch = useDispatch()
     const [quizzies, setQuizzies] = useState([])
 
@@ -51,4 +51,4 @@ const QuizSection = (props) => {
     )
 }
 
-export default QuizSection
+export default SectionQuiz

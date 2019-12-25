@@ -8,7 +8,7 @@ import api from '../../../api'
 
 import { ItemScore } from '.'
 
-const ScoreSection = (props) => {
+const SectionScore = (props) => {
     const sDispatch = useDispatch()
     const [scores, setScores] = useState([])
 
@@ -50,4 +50,4 @@ const ScoreSection = (props) => {
     )
 }
 
-export default ScoreSection
+export default SectionScore

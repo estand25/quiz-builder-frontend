@@ -1,7 +1,7 @@
-import QuestionSection from './QuestionSection'
+import SectionQuestion from './SectionQuestion'
 import ItemQuestion from './ItemQuestion'
 
 export {
-    QuestionSection,
+    SectionQuestion,
     ItemQuestion
 }
