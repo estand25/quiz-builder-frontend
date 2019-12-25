@@ -1,7 +1,7 @@
-import AddScore from'./AddScore'
+import ScoreSection from'./ScoreSection'
 import ItemScore from './ItemScore'
 
 export {
-    AddScore,
+    ScoreSection,
     ItemScore
 }

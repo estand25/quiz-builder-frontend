@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AddScore } from '../../components/section/score'
+import { ScoreSection } from '../../components/section/score'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -12,7 +12,7 @@ const Wrapper = styled.div.attrs({
 const Scores = () => {
     return (
         <Wrapper>
-            <AddScore
+            <ScoreSection
                 AddObjectName={'Score'}
             />
         </Wrapper>

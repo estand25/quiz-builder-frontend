@@ -5,9 +5,9 @@ import { AddObj, ListObj } from '../modals'
 import { quiz } from '../../../actions'
 
 import api from '../../../api'
-import { ItemQuiz } from '../quiz'
+import { ItemQuiz } from '.'
 
-const AddQuiz = (props) => {
+const QuizSection = (props) => {
     const qDispatch = useDispatch()
     const [quizzies, setQuizzies] = useState([])
 
@@ -51,4 +51,4 @@ const AddQuiz = (props) => {
     )
 }
 
-export default AddQuiz
+export default QuizSection

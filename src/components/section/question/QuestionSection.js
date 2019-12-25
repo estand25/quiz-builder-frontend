@@ -6,9 +6,9 @@ import { question } from '../../../actions'
 
 import api from '../../../api'
 
-import { ItemQuestion } from '../question'
+import { ItemQuestion } from '.'
 
-const AddQuestion = (props) => {
+const QuestionSection = (props) => {
     const qDispatch = useDispatch()
     const [questions, setQuestions] = useState([])
 
@@ -58,4 +58,4 @@ const AddQuestion = (props) => {
     )
 }
 
-export default AddQuestion
+export default QuestionSection

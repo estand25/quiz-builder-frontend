@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { AddQuestion } from '../../components/section/question'
+import { QuestionSection } from '../../components/section/question'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -12,7 +12,7 @@ const Wrapper = styled.div.attrs({
 const Questions = () => {
     return (
         <Wrapper>
-            <AddQuestion
+            <QuestionSection
                 AddObjectName={'Question'}
             />
         </Wrapper>
