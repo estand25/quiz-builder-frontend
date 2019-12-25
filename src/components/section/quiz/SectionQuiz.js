@@ -5,11 +5,13 @@ import { AddObj, ListObj } from '../modals'
 import { quiz } from '../../../actions'
 
 import api from '../../../api'
-import { ItemQuiz } from '.'
+import { ItemQuiz, AddQuiz, ModifyQuiz } from '../quiz'
 
 const SectionQuiz = (props) => {
     const qDispatch = useDispatch()
+    const [addStatus, setAddStatus] = useState(false)
     const [quizzies, setQuizzies] = useState([])
+    const [modifyQuiz, setModifyQuiz] = useState('')
 
     useEffect(
         () => {
@@ -25,6 +27,14 @@ const SectionQuiz = (props) => {
                             }
                         ))
 
+                        var item = {
+                            _id: 'Label',
+                            name: 'InputText',
+                            description: 'InputText',
+                            status: ['Option', [0,1]]
+                        }
+
+                        setModifyQuiz(item)
                         setQuizzies(quiz)
                     }
                 })
@@ -32,9 +42,15 @@ const SectionQuiz = (props) => {
     )
 
     const handleAddQuiz = () => {
-        qDispatch(quiz.setName(''))
-        qDispatch(quiz.setDescription(''))
-        qDispatch(quiz.setStatue(false))
+        var currentStatus = addStatus ? false : true;
+        setAddStatus(currentStatus)
+        console.log('handleAddQuiz', currentStatus);
+        
+
+        // setAddStatus(!AddStatus)
+        // qDispatch(quiz.setName(''))
+        // qDispatch(quiz.setDescription(''))
+        // qDispatch(quiz.setStatue(false))
     }
 
     return (
@@ -43,6 +59,12 @@ const SectionQuiz = (props) => {
                 onAddHandle={handleAddQuiz}
                 AddObjectName={props.AddObjectName}
             />
+            {/* <AddQuiz 
+                status={addStatus}
+                item={modifyQuiz}
+                modifyTemplate={ModifyQuiz}
+                template={ItemQuiz}
+            /> */}
             <ListObj
                 list={quizzies}
                 template={ItemQuiz}
