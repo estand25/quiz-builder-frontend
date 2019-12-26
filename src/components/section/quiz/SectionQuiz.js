@@ -21,36 +21,28 @@ const SectionQuiz = (props) => {
                         var quiz = q.data.data.map(i => (
                             {
                                 _id: i._id,
-                                name: i.name,
-                                description: i.description, 
-                                status: i.status == 1 ? 'On' : 'Off'
+                                Name: i.name,
+                                Description: i.description, 
+                                Status: i.status == 1 ? 'On' : 'Off'
                             }
                         ))
 
                         var item = {
-                            _id: 'Label',
-                            name: 'InputText',
-                            description: 'InputText',
-                            status: ['Option', [0,1]]
+                            Name: 'InputText',
+                            Description: 'InputText',
+                            Status: ['Option', ['On','Off']]
                         }
 
                         setModifyQuiz(item)
                         setQuizzies(quiz)
                     }
                 })
-        }
+        },[]
     )
 
     const handleAddQuiz = () => {
         var currentStatus = addStatus ? false : true;
         setAddStatus(currentStatus)
-        console.log('handleAddQuiz', currentStatus);
-        
-
-        // setAddStatus(!AddStatus)
-        // qDispatch(quiz.setName(''))
-        // qDispatch(quiz.setDescription(''))
-        // qDispatch(quiz.setStatue(false))
     }
 
     return (
@@ -59,12 +51,11 @@ const SectionQuiz = (props) => {
                 onAddHandle={handleAddQuiz}
                 AddObjectName={props.AddObjectName}
             />
-            {/* <AddQuiz 
+            <AddQuiz 
                 status={addStatus}
                 item={modifyQuiz}
                 modifyTemplate={ModifyQuiz}
-                template={ItemQuiz}
-            /> */}
+            />
             <ListObj
                 list={quizzies}
                 template={ItemQuiz}
