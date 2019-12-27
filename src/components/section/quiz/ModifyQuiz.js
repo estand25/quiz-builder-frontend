@@ -50,48 +50,50 @@ const Spacing = styled.div`
     padding: 5ps;
 `
 
-const ModifyQuiz = (props) => {
-    const [quizFields, setQuizFields] = useState({
-        Name: '',
-        Description: '',
-        Status: ''
-    });
-
-    const t = Object.entries(props)
-
-    return (
-        <Wrapper>
-            {t.map((item,index) => 
-                <Row key={index}>
-                    <Item
-                        label={item[0]}
-                        type={item[1]}
-                        value={quizFields.Name}
-                        onChange={setQuizFields}
-                    />
-                </Row>
-            )}
-        </Wrapper>
-    )
-}
-
 const Item = (props) => {
-    switch (props.type) {
+    var list = ''
+    var type = ''
+
+    if(_.isArray(props.type)){
+        var temp = Object.values(props.type)
+        type = temp[0]
+        list = temp[1]
+        
+    } else {
+        type = props.type
+    }    
+
+    switch (type) {
         case 'InputText':
             return (      
                 <Spacing>
                     <Label>{props.label}</Label>       
                     <InputText
                         type="text"
-                        value={props.value}
-                        onChange={props.onChange}
+                        value={props.value[props.label]}
+                        onChange={e => props.onChange(e, props.label)}
                     />
                 </Spacing>  
             )
         case 'Option':
             return (
                 <div>
-                    'Array'
+                    <Spacing>
+                        <Label>{props.label}</Label>
+                    </Spacing>
+                    <Select
+                        value={props.value[props.label]}
+                        onChange={e => props.onChange(e, props.label)}
+                    >
+                        <option value="" hidden>
+                            - Select One -
+                        </option>
+                        {list.map((l) =>                             
+                            <option key={l} value={l}>
+                                {l}
+                            </option>
+                        )}
+                    </Select>
                 </div>
             )
         default:
@@ -101,4 +103,47 @@ const Item = (props) => {
     }
 }
 
+const ModifyQuiz = (props) => {
+    const [quizFields, setQuizFields] = useState({
+        Name: '',
+        Description: '',
+        Status: ''
+    });
+    
+    const t = Object.entries(props)
+
+    const a = t.map((i) => {
+        return (
+            i[0]
+        )
+    })
+
+    var _state = {}
+    for(var c=0; c< a.length; c++){
+        _state[a[c]] = ''
+    }
+
+    const changeState = (name, value) => {
+        console.log('ChangeState', name);
+        console.log('ChangeState', value.target.value);
+    }
+    
+    return (
+        <Wrapper>
+            {t.map((item,index) => 
+                <Row key={index}>
+                    <Item
+                        label={item[0]}
+                        type={_.isArray(item[1]) ? item[1] : item[1] }
+                        value={_state}
+                        onChange={(n,v) => changeState(n,v)}
+                    />
+                </Row>
+            )}
+        </Wrapper>
+    )
+}
+
 export default ModifyQuiz
+
+//https://itnext.io/how-to-build-a-dynamic-controlled-form-with-react-hooks-2019-b39840f75c4f
