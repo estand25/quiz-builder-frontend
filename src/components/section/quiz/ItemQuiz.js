@@ -48,19 +48,6 @@ const ItemQuiz = (props) => {
     const [onEdit, setOnEdit] = useState(false)
     const [onDelete, setOnDelete] = useState(false)
 
-    const OnEditBtnRender = () => {
-        return (
-            <div>
-                <Update>
-                    {'Update'}
-                </Update>
-                <Cancel>
-                    {'Cancel'}
-                </Cancel>
-            </div>
-        )
-    }
-
     const OnEditRender = () => {
         const { itemEntries} = Constant
         const value = Object.values(props)        
@@ -77,7 +64,7 @@ const ItemQuiz = (props) => {
                     {Object.entries(props).map((item,index) => 
                         <Row key={index}>
                             <Label>{item[0] + ": "}
-                                {_.isArray(item[1]) ? ArrayList(item[1]) : item[1] }
+                                {_.isArray(item[1]) ? ArrayList(item[1]) : item[1]}
                             </Label>
                         </Row>
                     )}

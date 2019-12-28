@@ -22,10 +22,6 @@ const initialItemStates = () => {
     return _state
 }
 
-// var onItemState = (props) => {
-//     var _state = {}
-// }
-
 export default {
     item,
     itemEntries,

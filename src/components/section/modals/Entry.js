@@ -80,6 +80,12 @@ const Entry = (props) => {
                     </Select>
                 </div>
             )
+        case 'ReadOnly': 
+            return (
+                <Spacing>
+                    <Label>{props.label}</Label>
+                </Spacing>
+            )
         default:
             return (
                 <></>

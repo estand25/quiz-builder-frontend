@@ -21,6 +21,7 @@ const ModifyItem = (props) => {
 
     const changeState = (name, value) => {
         var internalState = Object.assign({}, _state_)
+        
         Object.getOwnPropertyNames(_state_)
             .forEach(val => {
                 if(val === name){
