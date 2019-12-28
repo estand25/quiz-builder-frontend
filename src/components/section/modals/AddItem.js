@@ -1,15 +1,15 @@
 import React from 'react'
+import { ModifyItem } from '../modals'
 
 const AddItem = (props) => {
-    const {item, status, _state, entries } = props
-    
+    const {status, _state, entries } = props
+
     if(status){
         return (
             <div>
-                <props.modifyTemplate
+                <ModifyItem
                     _state={_state}
                     entries={entries}
-                    {...item}
                 />
             </div>
         )

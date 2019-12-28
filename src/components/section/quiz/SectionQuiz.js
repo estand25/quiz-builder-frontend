@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { AddObj, ListObj, Item, AddItem, ModifyItem } from '../modals'
+import { AddObj, ListObj, Item, AddItem } from '../modals'
 import api from '../../../api'
 
 import ItemQuiz from './ItemQuiz'
+
+import { Constant } from '../quiz'
 
 const SectionQuiz = (props) => {
     const [addStatus, setAddStatus] = useState(false)
 
     const [quizzies, setQuizzies] = useState([])
-    const [modifyQuiz, setModifyQuiz] = useState('')
 
     const [initialState, setInitialState] = useState({})
     const [initialEntries, setInitialEntries] = useState({})
+
+    const { itemEntries, initialItemStates, item } = Constant
 
     useEffect(
         () => {
@@ -26,30 +29,9 @@ const SectionQuiz = (props) => {
                                 Status: i.status == 1 ? 'On' : 'Off'
                             }
                         ))
-
-                        var item = {
-                            Name: 'InputText',
-                            Description: 'InputText',
-                            Status: ['Option', ['On','Off']]
-                        }
-
-                        const itemEntries = Object.entries(item)
-
-                        const itemValues = itemEntries.map((entries) => {
-                            return (
-                                entries[0]
-                            )
-                        })
-                    
-                        var _state = {}
-                    
-                        for(var c=0; c < itemValues.length; c++){
-                            _state[itemValues[c]] = ''
-                        }
                         
-                        setInitialEntries(itemEntries)
-                        setInitialState(_state)
-                        setModifyQuiz(item)
+                        setInitialEntries(itemEntries) 
+                        setInitialState(initialItemStates) 
                         setQuizzies(quiz)
                     }
                 })
@@ -69,8 +51,6 @@ const SectionQuiz = (props) => {
             />
             <AddItem 
                 status={addStatus}
-                item={modifyQuiz}
-                modifyTemplate={ModifyItem}
                 _state={initialState}
                 entries={initialEntries}
             />
