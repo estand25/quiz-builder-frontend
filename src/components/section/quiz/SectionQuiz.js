@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-
-import { AddObj, ListObj } from '../modals'
-import { quiz } from '../../../actions'
-
+import { AddObj, ListObj, Item, AddItem, ModifyItem } from '../modals'
 import api from '../../../api'
-import { ItemQuiz, AddQuiz, ModifyQuiz } from '../quiz'
+
+import ItemQuiz from './ItemQuiz'
 
 const SectionQuiz = (props) => {
-    const qDispatch = useDispatch()
     const [addStatus, setAddStatus] = useState(false)
+
     const [quizzies, setQuizzies] = useState([])
     const [modifyQuiz, setModifyQuiz] = useState('')
+
+    const [initialState, setInitialState] = useState({})
+    const [initialEntries, setInitialEntries] = useState({})
 
     useEffect(
         () => {
@@ -33,6 +33,22 @@ const SectionQuiz = (props) => {
                             Status: ['Option', ['On','Off']]
                         }
 
+                        const itemEntries = Object.entries(item)
+
+                        const itemValues = itemEntries.map((entries) => {
+                            return (
+                                entries[0]
+                            )
+                        })
+                    
+                        var _state = {}
+                    
+                        for(var c=0; c < itemValues.length; c++){
+                            _state[itemValues[c]] = ''
+                        }
+                        
+                        setInitialEntries(itemEntries)
+                        setInitialState(_state)
                         setModifyQuiz(item)
                         setQuizzies(quiz)
                     }
@@ -51,10 +67,12 @@ const SectionQuiz = (props) => {
                 onAddHandle={handleAddQuiz}
                 AddObjectName={props.AddObjectName}
             />
-            <AddQuiz 
+            <AddItem 
                 status={addStatus}
                 item={modifyQuiz}
-                modifyTemplate={ModifyQuiz}
+                modifyTemplate={ModifyItem}
+                _state={initialState}
+                entries={initialEntries}
             />
             <ListObj
                 list={quizzies}

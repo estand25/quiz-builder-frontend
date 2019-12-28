@@ -32,7 +32,7 @@ const SectionQuestion = (props) => {
                         setQuestions(question)
                     }
                 })
-        }
+        },[]
     )
 
     const handleAddQuestion = () =>  {

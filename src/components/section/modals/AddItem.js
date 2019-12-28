@@ -1,11 +1,14 @@
 import React from 'react'
 
-const AddQuiz = (props) => {
-    const {item, status } = props
+const AddItem = (props) => {
+    const {item, status, _state, entries } = props
+    
     if(status){
         return (
             <div>
                 <props.modifyTemplate
+                    _state={_state}
+                    entries={entries}
                     {...item}
                 />
             </div>
@@ -17,4 +20,4 @@ const AddQuiz = (props) => {
     }
 }
 
-export default AddQuiz
+export default AddItem

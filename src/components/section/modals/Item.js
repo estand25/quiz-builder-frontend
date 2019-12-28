@@ -20,7 +20,7 @@ const Label = styled.label`
     font-size: 20px;
 `
 
-const ItemQuiz = (props) => {
+const Item = (props) => {
     const t = Object.entries(props)
 
     return (
@@ -36,4 +36,4 @@ const ItemQuiz = (props) => {
     )
 }
 
-export default ItemQuiz
+export default Item
