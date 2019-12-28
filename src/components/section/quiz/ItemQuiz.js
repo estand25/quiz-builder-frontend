@@ -48,7 +48,7 @@ const ItemQuiz = (props) => {
     const [onEdit, setOnEdit] = useState(false)
     const [onDelete, setOnDelete] = useState(false)
 
-    const OnEditButtonRender = () => {
+    const OnEditBtnRender = () => {
         return (
             <div>
                 <Update>
@@ -62,6 +62,7 @@ const ItemQuiz = (props) => {
     }
 
     const OnEditRender = () => {
+        const { itemEntries} = Constant
         const value = Object.values(props)        
         const name = Object.keys(props)
 
@@ -75,10 +76,9 @@ const ItemQuiz = (props) => {
                 <Wrapper>
                     {Object.entries(props).map((item,index) => 
                         <Row key={index}>
-                            <ReadOnlyItem
-                                label={item[0]}
-                                input={_.isArray(item[1]) ? ArrayList(item[1]) : item[1] }
-                            />
+                            <Label>{item[0] + ": "}
+                                {_.isArray(item[1]) ? ArrayList(item[1]) : item[1] }
+                            </Label>
                         </Row>
                     )}
                 </Wrapper>
@@ -87,10 +87,16 @@ const ItemQuiz = (props) => {
         } else {
             return (
                 <div>
-                    <ModifyOnlyItem
+                    <ModifyItem
                         _state={state}
-                    />
-                    <OnEditButtonRender />
+                        entries={itemEntries}
+                    />                
+                    <Update>
+                        {'Update'}
+                    </Update>
+                    <Cancel>
+                        {'Cancel'}
+                    </Cancel>
                 </div>
             )
         }
@@ -108,28 +114,6 @@ const ItemQuiz = (props) => {
             </Delete>
             <OnEditRender />
         </Wrapper>
-    )
-
-}
-
-const ReadOnlyItem = (props) => {
-    var { label, input } = props
-    return (
-        <Label>{label + ": "}
-            {input}
-        </Label>
-    )
-}
-
-const ModifyOnlyItem = (props) => {
-    const { itemEntries} = Constant
-    var {_state} = props
-
-    return (
-        <ModifyItem
-            _state={_state}
-            entries={itemEntries}
-        />
     )
 }
 
