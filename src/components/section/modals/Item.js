@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
-import { ArrayList } from '../modals'
+import { ArrayList, ModifyItem } from '../modals'
 
 const Wrapper = styled.div`
     padding: 5px 5px 5px 5px;
@@ -19,19 +19,94 @@ const Label = styled.label`
     margin: 1px;
     font-size: 20px;
 `
+const Edit = styled.div.attrs({
+    className: 'btn btn-primary',
+})`
+    margin 15px 15px 15px 15px
+`
+
+const Delete = styled.div.attrs({
+    className: 'btn btn-danger',
+})`
+    margin 15px 15px 15px 15px
+`
+const Update = styled.div.attrs({
+    className: 'btn btn-outline-success',
+})`
+    margin 15px 15px 15px 15px
+`
+
+const Cancel = styled.div.attrs({
+    className: 'btn btn-outline-danger',
+})`
+    margin 15px 15px 15px 15px
+`
 
 const Item = (props) => {
-    const t = Object.entries(props)
+    const { item_, onDelete, onModify, entries} = props
 
-    return (
+    const [onEdit, setOnEdit] = useState(false)
+    const [item_id, setItem_id] = useState('')
+
+    const OnEditRender = () => {
+        const value = Object.values(item_)        
+        const name = Object.keys(item_)
+
+        var state = {}
+        for(var i = 0; i < name.length; i++){
+            state[name[i]] = value[i]
+        }
+
+        setItem_id(state['_id'])
+
+        if(!onEdit){
+            return (
+                <Wrapper>
+                    {Object.entries(item_).map((item,index) => 
+                        <Row key={index}>
+                            <Label>{item[0] + ": "}
+                                {_.isArray(item[1]) ? ArrayList(item[1]) : item[1]}
+                            </Label>
+                        </Row>
+                    )}
+                </Wrapper>
+            )
+
+        } else {
+            return (
+                <div>
+                    <ModifyItem
+                        _state={state}
+                        entries={entries}
+                    />                
+                    <Update
+                        onClick={() => onModify(state,setOnEdit)}
+                    >
+                        {'Update'}
+                    </Update>
+                    <Cancel
+                        onClick={() => setOnEdit(!onEdit)}
+                    >
+                        {'Cancel'}
+                    </Cancel>
+                </div>
+            )
+        }
+    }
+
+    return(
         <Wrapper>
-            {t.map((item,index) => 
-                <Row key={index}>
-                    <Label>{item[0] + ": "}
-                        {_.isArray(item[1]) ? ArrayList(item[1]) : item[1] }
-                    </Label>
-                </Row>
-            )}
+            <Edit
+                onClick={() => setOnEdit(!onEdit)}
+            >
+                {'Edit'}
+            </Edit>
+            <Delete
+                onClick={() => onDelete(item_id)}
+            >
+                {'Delete'}
+            </Delete>
+            <OnEditRender />
         </Wrapper>
     )
 }

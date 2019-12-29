@@ -29,7 +29,8 @@ const ModifyItem = (props) => {
                 }
             })
 
-        setState(internalState)
+        _state = Object.assign(_state, internalState)
+        setState(internalState)        
     }
     
     return (

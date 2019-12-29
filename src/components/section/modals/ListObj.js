@@ -1,12 +1,16 @@
 import React from 'react'
 
 const ListObj = (props) => {
+    const {itemDelete, itemModify, entries} = props
     return (
         <div>
             {props.list.map((i) =>
                 <props.template
                     key={i._id}
-                    {...i}
+                    item_={i}
+                    onDelete={itemDelete}
+                    onModify={itemModify}
+                    entries={entries}
                 />
             )}
         </div>

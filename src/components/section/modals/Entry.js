@@ -51,7 +51,7 @@ const Entry = (props) => {
         case 'InputText':
             return (      
                 <Spacing>
-                    <Label>{props.label}</Label>       
+                    <Label>{props.label + ": "}</Label>       
                     <InputText
                         type="text"
                         value={props.value[props.label]}
@@ -63,7 +63,7 @@ const Entry = (props) => {
             return (
                 <div>
                     <Spacing>
-                        <Label>{props.label}</Label>
+                        <Label>{props.label + ": "}</Label>
                     </Spacing>
                     <Select
                         value={props.value[props.label]}
@@ -83,7 +83,7 @@ const Entry = (props) => {
         case 'ReadOnly': 
             return (
                 <Spacing>
-                    <Label>{props.label}</Label>
+                    <Label>{props.label + ": " + props.value[props.label]}</Label>
                 </Spacing>
             )
         default:

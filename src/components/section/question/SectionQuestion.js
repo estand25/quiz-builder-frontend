@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { AddObj, ListObj } from '../modals'
+import { AddObj, ListObj, Item, AddItem } from '../modals'
 import { question } from '../../../actions'
 
 import api from '../../../api'
 
-import { ItemQuestion } from '.'
+import { ItemQuestion } from './ItemQuestion'
+
+import { Constant } from '../question'
 
 const SectionQuestion = (props) => {
     const qDispatch = useDispatch()
+    const [addStatus, setAddStatus] = useState(false)
     const [questions, setQuestions] = useState([])
+
+    const { itemEntries, initialItemStates } = Constant
 
     useEffect(
         () => {
@@ -36,24 +41,25 @@ const SectionQuestion = (props) => {
     )
 
     const handleAddQuestion = () =>  {
-        qDispatch(question.setAddStatus(''))
-        qDispatch(question.setCorrectAnswer(''))
-        qDispatch(question.setQuizSelection(''))
-        qDispatch(question.setName(''))
-        qDispatch(question.setStatus(0))
-        qDispatch(question.setOrder(0))
+        var currentStatus = addStatus ? false : true;
+        setAddStatus(currentStatus)
     }
 
     return (
         <div>
             <AddObj
-                AddObjectName={props.AddObjectName}
                 onAddHandle={handleAddQuestion}
+                AddObjectName={props.AddObjectName}
             />
-            <ListObj
+            <AddItem 
+                status={addStatus}
+                _state={initialItemStates}
+                entries={itemEntries}
+            />
+            {/* <ListObj
                 list={questions}
                 template={ItemQuestion}
-            />
+            /> */}
         </div>
     )
 }
