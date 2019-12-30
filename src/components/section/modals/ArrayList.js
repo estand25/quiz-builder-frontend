@@ -12,18 +12,21 @@ const GeneralButton = styled.button`
     border-radius: 3px;
 `
 const ArrayList = (item) => {
-    console.log('ArrayList', item);
-    
     if(item.length === 0 ){
         return (
             <Holder />
         )
     }
 
+    const onDoubleClick = (item, event) => {
+        console.log('onDoubleCkeck', item);
+    }
+
     return Object.keys(item).map((key, i) => {
         return (
             <GeneralButton
                 key={key}
+                onDoubleClick={e => onDoubleClick(Object.values(item[i])[0], e)}
             >
                 {Object.values(item[i])[0]}
             </GeneralButton>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import _ from 'lodash'
 import {ArrayList} from '../../modals'
 
 const InputText = styled.input.attrs({
@@ -30,20 +31,22 @@ const InputOption = (props) => {
                     value={input}
                     onChange={e => setInput(e.target.value)}  
                     onKeyDown={ e =>{
-                        if(e.key === 'Enter'){
+                        if(e.key === 'Enter' && e.target.value !== ''){
+                            var list_ = _.isArray(list) ? list : new Array()
+
                             var index = list.length+1
                             var item = {
                                 [index]: e.target.value
                             }
-                            list.push(item)
+                            list_.push(item)
                             setInput('')
-                            return onChange(label, list)
+                            return onChange(label, list_)
                         }
                     }}                  
-                />
+                />   
                 <ArrayList
                     {...list}
-                />
+                /> 
             </Spacing>
         </div>
     )
