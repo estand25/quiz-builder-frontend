@@ -12,6 +12,8 @@ const GeneralButton = styled.button`
     border-radius: 3px;
 `
 const ArrayList = (item) => {
+    console.log('ArrayList', item);
+    
     if(item.length === 0 ){
         return (
             <Holder />

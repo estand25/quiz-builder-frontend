@@ -5,6 +5,7 @@ import api from '../../../api'
 import { Constant } from '../quiz'
 
 const SectionQuiz = (props) => {
+    const { AddObjectName } = props
     const [addStatus, setAddStatus] = useState(false)
 
     const [quizzies, setQuizzies] = useState([])
@@ -27,7 +28,7 @@ const SectionQuiz = (props) => {
                                 Status: i.status == 1 ? 'On' : 'Off'
                             }
                         ))
-                        
+
                         setQuizzies(quiz)
                     }
                 })
@@ -79,7 +80,7 @@ const SectionQuiz = (props) => {
         <div>
             <AddObj
                 onAddHandle={handleAddQuiz}
-                AddObjectName={props.AddObjectName}
+                AddObjectName={AddObjectName}
             />
             <AddItem 
                 status={addStatus}

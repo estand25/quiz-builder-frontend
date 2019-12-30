@@ -1,28 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Options, ReadOnly, CustomOption, InputOption } from '../modals/EntryTypes'
 
-const InputText = styled.input.attrs({
+const Input = styled.input.attrs({
     className: 'form-control',
 })`
     margin: 5px;
-`
-
-const Select = styled.select`
-    width: 100%;
-    height: 35px;
-    background: white;
-    color: gray;
-    font-size: 14px;
-    border: 1px solid black;
-
-    option {
-        color: black;
-        background: white;
-        display: flex;
-        white-space: pre;
-        min-height: 20px;
-        padding: 15px 15px 15px 15px;
-    }
 `
 
 const Label = styled.label`
@@ -45,14 +28,14 @@ const Entry = (props) => {
         
     } else {
         type = props.type
-    }    
+    }   
 
     switch (type) {
         case 'InputText':
             return (      
                 <Spacing>
                     <Label>{props.label + ": "}</Label>       
-                    <InputText
+                    <Input
                         type="text"
                         value={props.value[props.label]}
                         onChange={e => props.onChange(props.label, e.target.value)}
@@ -61,30 +44,41 @@ const Entry = (props) => {
             )
         case 'Option':
             return (
-                <div>
-                    <Spacing>
-                        <Label>{props.label + ": "}</Label>
-                    </Spacing>
-                    <Select
-                        value={props.value[props.label]}
-                        onChange={e => props.onChange(props.label, e.target.value)}
-                    >
-                        <option value="" hidden>
-                            - Select One -
-                        </option>
-                        {list.map((l) =>                             
-                            <option key={l} value={l}>
-                                {l}
-                            </option>
-                        )}
-                    </Select>
-                </div>
+                <Options
+                    label={props.label}
+                    value={props.value}
+                    list={list}
+                    onChange={props.onChange}
+                />
             )
         case 'ReadOnly': 
             return (
-                <Spacing>
-                    <Label>{props.label + ": " + props.value[props.label]}</Label>
-                </Spacing>
+                <ReadOnly
+                    label={props.label}
+                    value={props.value}
+                />
+            )
+        case 'CustomOption':
+            var val = Object.entries(props.value.Options)
+                .map(i => {                    
+                    return Object.entries(i[1])[0][1]
+                })
+                
+            return (
+                <CustomOption
+                    label={props.label}
+                    value={props.value}
+                    onChange={props.onChange}
+                    list={val}
+                />
+            )
+        case 'InputOption':  
+            return (
+                <InputOption
+                    label={props.label}
+                    list={props.value.Options}
+                    onChange={props.onChange}
+                />
             )
         default:
             return (
@@ -94,3 +88,18 @@ const Entry = (props) => {
 }
 
 export default Entry
+
+// const InputText = (props) => {
+//     const { label, value, onChange} = props
+
+//     return (     
+//         <Spacing>
+//             <Label>{label + ": "}</Label>       
+//             <InputText
+//                 type="text"
+//                 value={value[label]}
+//                 onChange={e => onChange(props.label, e.target.value)}
+//             />
+//         </Spacing>  
+//     )
+// }

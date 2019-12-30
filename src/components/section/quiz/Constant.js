@@ -19,6 +19,8 @@ const initialItemStates = () => {
         _state[itemValues[c]] = ''
     }
 
+    console.log('initialItemStates', _state);
+    
     return _state
 }
 

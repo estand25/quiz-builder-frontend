@@ -2,23 +2,19 @@ const OptionGenerator = (limit, internal) => {
     var ret = []
 
     for(var i = 0; i < limit; i = i + internal){
-        if(i <= 9){  
-            ret.push('0'+i)
-        } else {
-            ret.push(i)
-        }
+        ret.push(i)
     }
-
+    
     return ret
 }
 
 const item = {
     Question: 'InputText',
-    Answer: 'InputText',
-    Options: 'CustomInput',
+    Options: ['InputOption', []],
+    Answer: ['CustomOption', []],
     Status: ['Option', ['On','Off']],
     Order: ['Option', OptionGenerator(51,1)],
-    Point: ['Point', OptionGenerator(50,5)]
+    Point: ['Option', OptionGenerator(50,5)],
 }
 
 const itemEntries = Object.entries(item)
