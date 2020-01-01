@@ -28,7 +28,7 @@ const ItemQuestion = (props) => {
             {t.map((item,index) => 
                 <Row key={index}>
                     <Label>{item[0] + ": "}
-                        {_.isArray(item[1]) ? ArrayList(item[1]) : item[1] }
+                        {_.isArray(item[1]) ? ArrayList(item[1], true) : item[1] }
                     </Label>
                 </Row>
             )}

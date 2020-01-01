@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { AddObj, ListObj, Item, AddItem } from '../modals'
 import api from '../../../api'
+import { quiz } from '../../../actions'
 
 import { Constant } from '../quiz'
 
 const SectionQuiz = (props) => {
+    const qDispatch = useDispatch()
     const { AddObjectName } = props
     const [addStatus, setAddStatus] = useState(false)
 
@@ -20,7 +23,7 @@ const SectionQuiz = (props) => {
             api.getAllQuiz()
                 .then(q => {
                     if(q.data.success == true){
-                        var quiz = q.data.data.map(i => (
+                        var _quiz = q.data.data.map(i => (
                             {
                                 _id: i._id,
                                 Name: i.name,
@@ -29,7 +32,8 @@ const SectionQuiz = (props) => {
                             }
                         ))
 
-                        setQuizzies(quiz)
+                        setQuizzies(_quiz)
+                        qDispatch(quiz.setAllQuiz(_quiz))
                     }
                 })
         },[]

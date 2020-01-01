@@ -14,3 +14,8 @@ export const setStatue = (status) => ({
     type: actions.SET_STATUS,
     payload: status
 })
+
+export const setAllQuiz = (data) => ({
+    type: actions.SET_ALL_QUIZ,
+    payload: data
+})

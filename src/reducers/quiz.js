@@ -14,6 +14,8 @@ export default (state = initialState, action) => {
             return { ...state, description: action.payload}
         case actions.SET_STATUS:
             return { ...state, status: action.payload}
+        case actions.SET_ALL_QUIZ:
+            return { ...state, allQuiz: action.payload}
         default:
             return state
     }

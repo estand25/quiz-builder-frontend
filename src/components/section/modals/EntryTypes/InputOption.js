@@ -44,9 +44,7 @@ const InputOption = (props) => {
                         }
                     }}                  
                 />   
-                <ArrayList
-                    {...list}
-                /> 
+                {ArrayList(list, false, label, onChange)}
             </Spacing>
         </div>
     )

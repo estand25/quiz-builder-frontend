@@ -54,3 +54,8 @@ export const setQuestionCount = questionCount => ({
     type: actions.SET_QUESTION_COUNT,
     payload: questionCount
 })
+
+export const setAllQuestion = (data) => ({
+    type: actions.SET_ALL_QUESTION,
+    payload: data
+})

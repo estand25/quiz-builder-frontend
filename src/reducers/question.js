@@ -39,6 +39,8 @@ export default (state = initialState, action) => {
             return { ...state, status: action.payload}
         case actions.SET_QUESTION_COUNT:
             return { ...state, questionCount: action.payload}
+        case actions.SET_ALL_QUESTION:
+            return { ...state, allQuestion: action.payload}
         default:
             return state
     }

@@ -14,7 +14,7 @@ const item = {
     Answer: ['CustomOption', []],
     Status: ['Option', ['On','Off']],
     Order: ['Option', OptionGenerator(51,1)],
-    Point: ['Option', OptionGenerator(50,5)],
+    Point: ['Option', OptionGenerator(50,5)]
 }
 
 const itemEntries = Object.entries(item)

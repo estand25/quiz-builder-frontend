@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { AddObj, ListObj, Item, AddItem } from '../modals'
 import { question } from '../../../actions'
@@ -10,6 +10,8 @@ import { Constant } from '../question'
 
 const SectionQuestion = (props) => {
     const qDispatch = useDispatch()
+    const qState = useSelector(state => state.question)
+    const quState = useSelector(state => state.quiz)
     const { AddObjectName } = props
     const [addStatus, setAddStatus] = useState(false)
     const [questions, setQuestions] = useState([])
@@ -18,6 +20,7 @@ const SectionQuestion = (props) => {
 
     var entries = [...itemEntries]
     entries.unshift(['_id', 'ReadOnly'])
+    entries.unshift(['Quiz', quState.allQuiz])
 
     useEffect(
         () => {
@@ -33,10 +36,9 @@ const SectionQuestion = (props) => {
                                 Status: i.status == 1 ? 'On' : 'Off',
                                 Order: i.order,
                                 Point: i.point,
+                                Quiz: i.quizId
                             }
-                        ))                        
-                        console.log('useEffect', question);
-                        
+                        ))                                                
                         setQuestions(question)
                     }
                 })
@@ -59,13 +61,24 @@ const SectionQuestion = (props) => {
         }
     }
 
-    const handleModifyQuestion = (state, setOnEdit) => {s
+    const handleModifyQuestion = (state, setOnEdit) => {
         const {_id, Question, Options, Answer, Status, Point, Order} = state
 
+        var _answer = Object.entries(Options).map(i => {
+            if(Object.entries(Object.values(i)[1])[0][1] == Answer){
+                return Object.entries(Object.values(i)[1])[0][0]
+            }
+        }).filter(i => i != undefined)
+
+        var _status = Status == 'On' ? 1 : 0
+        
         var payload = {
-            name: Name,
-            description: Description,
-            status: Status == 'On' ? 1 : 0
+            answer: _answer[0],
+            options: Options,
+            status: _status,
+            question: Question,
+            order: parseInt(Order),
+            point: parseInt(Point)
         }
 
         if(
