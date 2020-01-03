@@ -80,7 +80,7 @@ const Item = (props) => {
                         entries={entries}
                     />                
                     <Update
-                        onClick={() => onModify(state,setOnEdit)}
+                        onClick={() => onModify(state, setOnEdit)}
                     >
                         {'Update'}
                     </Update>

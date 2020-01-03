@@ -80,6 +80,10 @@ const SectionQuiz = (props) => {
         }
     }
 
+    const handleNewQuiz = (state) => {
+
+    }
+
     return (
         <div>
             <AddObj

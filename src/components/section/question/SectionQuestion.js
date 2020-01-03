@@ -15,12 +15,14 @@ const SectionQuestion = (props) => {
     const { AddObjectName } = props
     const [addStatus, setAddStatus] = useState(false)
     const [questions, setQuestions] = useState([])
+    const [quizNameList, setQuizNameList] = useState(quState.allQuiz ? quState.allQuiz.map((i) => i.Name) : [])
+    const [quizList, setQuizList] = useState([])
 
     const { itemEntries, initialItemStates } = Constant   
 
     var entries = [...itemEntries]
+    entries.push(['Quiz', ['Option', quizNameList]])
     entries.unshift(['_id', 'ReadOnly'])
-    entries.unshift(['Quiz', quState.allQuiz])
 
     useEffect(
         () => {
@@ -36,10 +38,28 @@ const SectionQuestion = (props) => {
                                 Status: i.status == 1 ? 'On' : 'Off',
                                 Order: i.order,
                                 Point: i.point,
-                                Quiz: i.quizId
+                                Quiz: i.quizName
                             }
-                        ))                                                
+                        ))         
+
                         setQuestions(question)
+
+                        if(quizNameList.length >= 0){
+                            api.getAllQuiz()
+                                .then(q => {
+                                    if(q.data.success === true) {                                        
+                                        var quizName_ = q.data.data.map(i => i.name)
+                                        var quizList_ = q.data.data.map(i => (
+                                            {
+                                                _id:i._id,
+                                                name: i.name,
+                                            }
+                                        ))
+                                    }
+                                    setQuizNameList(quizName_)
+                                    setQuizList(quizList_)
+                                })
+                        }
                     }
                 })
         },[]
@@ -61,8 +81,8 @@ const SectionQuestion = (props) => {
         }
     }
 
-    const handleModifyQuestion = (state, setOnEdit) => {
-        const {_id, Question, Options, Answer, Status, Point, Order} = state
+    const handleModifyQuestion = (state, setOnEdit) => {        
+        const {_id, Question, Options, Answer, Status, Point, Order, Quiz} = state
 
         var _answer = Object.entries(Options).map(i => {
             if(Object.entries(Object.values(i)[1])[0][1] == Answer){
@@ -78,7 +98,9 @@ const SectionQuestion = (props) => {
             status: _status,
             question: Question,
             order: parseInt(Order),
-            point: parseInt(Point)
+            point: parseInt(Point),
+            quizName: Quiz,
+            quizId: quizList.filter(i => i.name == Quiz)[0]._id
         }
 
         if(
@@ -95,6 +117,10 @@ const SectionQuestion = (props) => {
                     }
                 })
         }
+    }
+
+    const handleNewQuestion = (state) => {
+        
     }
 
     return (
