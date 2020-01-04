@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { AddObj, ListObj } from '../modals'
+import { AddObj, ListObj, Item, AddItem } from '../modals'
 import { score } from '../../../actions'
 
 import api from '../../../api'
 
-import { ItemScore } from '.'
+import { Constant } from '../score'
 
 const SectionScore = (props) => {
     const sDispatch = useDispatch()
+    const { AddObjectName } = props  
+    const [addStatus, setAddStatus] = useState(false)
     const [scores, setScores] = useState([])
+    
+    const { itemEntries, initialItemStates } = Constant
+
 
     useEffect(
         () => {
@@ -21,7 +26,7 @@ const SectionScore = (props) => {
                             {
                                 _id: i._id,
                                 score: i.score,
-                                nonAnswered: i.nonAnswered
+                                NonAnswered: i.nonAnswered
                             }
                         ))
                         
@@ -36,15 +41,29 @@ const SectionScore = (props) => {
         sDispatch(score.setQuestionCount(0))
     }
 
+    const handleDeleteScore = () => {}
+    const handleModifyScore = () => {}
+    const handleNewScore = () => {}
+
     return (
         <div>
             <AddObj
                 onAddHandle={onHandleAddScore}
-                AddObjectName={props.AddObjectName}
+                AddObjectName={AddObjectName}
+            />
+            <AddItem 
+                status={addStatus}
+                setAddStatus={setAddStatus}
+                _state={initialItemStates}
+                itemNew={handleNewScore}
+                entries={itemEntries}
             />
             <ListObj
                 list={scores}
-                template={ItemScore}
+                template={Item}
+                itemDelete={() => handleDeleteScore}
+                itemModify={() => handleModifyScore}
+                entries={itemEntries}
             />
         </div>
     )

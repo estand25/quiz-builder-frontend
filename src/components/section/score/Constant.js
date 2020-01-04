@@ -1,6 +1,20 @@
+const OptionGenerator = (limit, internal) => {
+    var ret = []
+
+    for(var i = 0; i < limit; i = i + internal){
+        ret.push(i)
+    }
+    
+    return ret
+}
+
 const item = {
-    score: 'InputText',
-    NonAnswered: 'InputText'
+    Question: 'InputText',
+    Options: ['InputOption', []],
+    Answer: ['CustomOption', []],
+    Status: ['Option', ['On','Off']],
+    Order: ['Option', OptionGenerator(51,1)],
+    Point: ['Option', OptionGenerator(50,5)]
 }
 
 const itemEntries = Object.entries(item)

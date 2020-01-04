@@ -1,7 +1,7 @@
 import SectionScore from'./SectionScore'
-import ItemScore from './ItemScore'
+import Constant from './Constant'
 
 export {
-    SectionScore,
-    ItemScore
+    Constant,
+    SectionScore
 }
