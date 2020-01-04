@@ -18,8 +18,6 @@ const initialItemStates = () => {
     for(var c=0; c < itemValues.length; c++){
         _state[itemValues[c]] = ''
     }
-
-    console.log('initialItemStates', _state);
     
     return _state
 }

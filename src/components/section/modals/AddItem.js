@@ -15,7 +15,7 @@ const Cancel = styled.div.attrs({
 `
 
 const AddItem = (props) => {
-    const {status, _state, entries } = props
+    var {status, _state, itemNew, entries, setAddStatus } = props
 
     if(status){
         return (
@@ -24,10 +24,14 @@ const AddItem = (props) => {
                     _state={_state}
                     entries={entries}
                 />
-                <AddedItem>
+                <AddedItem
+                    onClick={() => itemNew(_state)}
+                >
                     {'Add'}
                 </AddedItem>
-                <Cancel>
+                <Cancel
+                    onClick={() => setAddStatus(false)}
+                >
                     {'Cancel'}
                 </Cancel>
             </div>

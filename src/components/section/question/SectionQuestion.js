@@ -18,11 +18,16 @@ const SectionQuestion = (props) => {
     const [quizNameList, setQuizNameList] = useState(quState.allQuiz ? quState.allQuiz.map((i) => i.Name) : [])
     const [quizList, setQuizList] = useState([])
 
-    const { itemEntries, initialItemStates } = Constant   
+    const { itemEntries, initialItemStates, itemStatesGen, itemValuesGen } = Constant   
 
     var entries = [...itemEntries]
     entries.push(['Quiz', ['Option', quizNameList]])
     entries.unshift(['_id', 'ReadOnly'])
+
+    var addEntries = [...itemEntries]
+    addEntries.push(['Quiz', ['Option', quizNameList]])
+
+    var newItemState = itemStatesGen(itemValuesGen(entries))   
 
     useEffect(
         () => {
@@ -81,14 +86,18 @@ const SectionQuestion = (props) => {
         }
     }
 
-    const handleModifyQuestion = (state, setOnEdit) => {        
-        const {_id, Question, Options, Answer, Status, Point, Order, Quiz} = state
-
-        var _answer = Object.entries(Options).map(i => {
-            if(Object.entries(Object.values(i)[1])[0][1] == Answer){
+    const itemFromList = (options, item) => {
+        return Object.entries(options).map(i => {
+            if(Object.entries(Object.values(i)[1])[0][1] == item){
                 return Object.entries(Object.values(i)[1])[0][0]
             }
         }).filter(i => i != undefined)
+    }
+
+    const handleModifyQuestion = (state, setOnEdit) => {        
+        const {_id, Question, Options, Answer, Status, Point, Order, Quiz} = state
+
+        var _answer = itemFromList(Options, Answer)
 
         var _status = Status == 'On' ? 1 : 0
         
@@ -119,8 +128,37 @@ const SectionQuestion = (props) => {
         }
     }
 
-    const handleNewQuestion = (state) => {
+    const handleNewQuestion = (state) => {  
+        const {Question, Options, Answer, Status, Point, Order, Quiz} = state
+
+        var _answer = itemFromList(Options, Answer)
+
+        var _status = Status == 'On' ? 1 : 0
         
+        console.log('handleNewQuestion', quizList);
+        console.log('handleNewQuestion', Quiz);
+        console.log('handleNewQuestion', quizList.filter(i => i.name == Quiz));
+        console.log('handleNewQuestion', quizList.filter(i => i.name == Quiz)._id);
+        
+        var payload = {
+            answer: _answer[0],
+            options: Options,
+            status: _status,
+            question: Question,
+            order: parseInt(Order),
+            point: parseInt(Point),
+            quizName: Quiz,
+            quizId: quizList.filter(i => i.name == Quiz)[0]._id
+        }
+
+        api.insertQuestion(payload)
+            .then(res => {
+                if(res.data.success) {
+                    window.location.reload()
+                    window.alert('New Question successfully add !!')
+                    setAddStatus(false)
+                }
+            })
     }
 
     return (
@@ -131,8 +169,10 @@ const SectionQuestion = (props) => {
             />
             <AddItem 
                 status={addStatus}
-                _state={initialItemStates}
-                entries={itemEntries}
+                setAddStatus={setAddStatus}
+                _state={newItemState}
+                itemNew={handleNewQuestion}
+                entries={addEntries}
             />
             <ListObj
                 list={questions}

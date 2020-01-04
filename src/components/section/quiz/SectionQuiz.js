@@ -8,9 +8,9 @@ import { Constant } from '../quiz'
 
 const SectionQuiz = (props) => {
     const qDispatch = useDispatch()
-    const { AddObjectName } = props
+    const { AddObjectName } = props  
+    const [loading, setLoading] = useState(false)
     const [addStatus, setAddStatus] = useState(false)
-
     const [quizzies, setQuizzies] = useState([])
 
     const { itemEntries, initialItemStates } = Constant
@@ -81,7 +81,22 @@ const SectionQuiz = (props) => {
     }
 
     const handleNewQuiz = (state) => {
+        const {_id, Name, Description, Status} = state
 
+        var payload = {
+            name: Name,
+            description: Description,
+            status: Status == 'On' ? 1 : 0
+        }
+
+        api.insertQuiz(payload)
+            .then(res => {
+                if(res.data.success){
+                    window.location.reload()
+                    window.alert('New Quiz successfully created !!')
+                    setAddStatus(false)
+                }
+            })
     }
 
     return (
@@ -92,7 +107,9 @@ const SectionQuiz = (props) => {
             />
             <AddItem 
                 status={addStatus}
+                setAddStatus={setAddStatus}
                 _state={initialItemStates}
+                itemNew={handleNewQuiz}
                 entries={itemEntries}
             />
             <ListObj

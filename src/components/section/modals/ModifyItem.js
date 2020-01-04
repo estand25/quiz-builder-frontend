@@ -16,10 +16,7 @@ const Row = styled.div`
 `
 
 const ModifyItem = (props) => {  
-    var {_state, entries } = props
-
-    console.log('ModifyItem', _state);
-    console.log('ModifyItem', entries);
+    var {_state, entries } = props   
     
     const [_state_, setState] = useState(_state) 
 
