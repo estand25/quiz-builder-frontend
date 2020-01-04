@@ -18,7 +18,7 @@ const SectionQuestion = (props) => {
     const [quizNameList, setQuizNameList] = useState(quState.allQuiz ? quState.allQuiz.map((i) => i.Name) : [])
     const [quizList, setQuizList] = useState([])
 
-    const { itemEntries, initialItemStates, itemStatesGen, itemValuesGen } = Constant   
+    const { itemEntries, itemStatesGen, itemValuesGen } = Constant   
 
     var entries = [...itemEntries]
     entries.push(['Quiz', ['Option', quizNameList]])
@@ -134,11 +134,6 @@ const SectionQuestion = (props) => {
         var _answer = itemFromList(Options, Answer)
 
         var _status = Status == 'On' ? 1 : 0
-        
-        console.log('handleNewQuestion', quizList);
-        console.log('handleNewQuestion', Quiz);
-        console.log('handleNewQuestion', quizList.filter(i => i.name == Quiz));
-        console.log('handleNewQuestion', quizList.filter(i => i.name == Quiz)._id);
         
         var payload = {
             answer: _answer[0],
