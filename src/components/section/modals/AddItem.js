@@ -14,9 +14,7 @@ const Cancel = styled.div.attrs({
     margin 15px 15px 15px 15px
 `
 
-const AddItem = (props) => {
-    var {status, _state, itemNew, entries, setAddStatus } = props
-
+const AddItem = ({status, _state, itemNew, entries, setAddStatus }) => {
     if(status){
         return (
             <div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { AddItemTitle, ListItem, Item, AddItem } from '../modals'
+import { AddEditListItem } from '../modals'
 import api from '../../../api'
 import { quiz } from '../../../actions'
 
@@ -8,7 +8,7 @@ import { Constant } from '../quiz'
 
 const SectionQuiz = (props) => {
     const qDispatch = useDispatch()
-    const { AddItemTitleectName } = props  
+    const { AddItemTitleName } = props  
     const [loading, setLoading] = useState(false)
     const [addStatus, setAddStatus] = useState(false)
     const [quizzies, setQuizzies] = useState([])
@@ -101,23 +101,19 @@ const SectionQuiz = (props) => {
 
     return (
         <div>
-            <AddItemTitle
+            <AddEditListItem
                 onAddHandle={handleAddQuiz}
-                AddItemTitleectName={AddItemTitleectName}
-            />
-            <AddItem 
+                addItemTitle={AddItemTitleName}
                 status={addStatus}
                 setAddStatus={setAddStatus}
-                _state={initialItemStates}
-                itemNew={handleNewQuiz}
-                entries={itemEntries}
-            />
-            <ListItem
+                state={initialItemStates}
                 list={quizzies}
-                template={Item}
+                itemNew={handleNewQuiz}
                 itemDelete={handleDeleteQuiz}
-                itemModify={handleModifyQuiz}
+                itemModidy={handleModifyQuiz}
+                addEntries={itemEntries}
                 entries={entries}
+                emptyMessage={'No quiz are present'}
             />
         </div>
     )

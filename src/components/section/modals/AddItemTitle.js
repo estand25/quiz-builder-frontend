@@ -7,10 +7,10 @@ const Add = styled.div.attrs({
     margin 15px 15px 15px 15px
 `
 
-const AddItemTitle = (props) => {
+const AddItemTitle = ({onAddHandle, titleName}) => {
     return (
-        <Add onClick={props.onAddHandle}>
-            Add {props.AddItemTitleectName}
+        <Add onClick={onAddHandle}>
+            Add {titleName}
         </Add>
     )
 }

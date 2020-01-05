@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { AddItemTitle, ListItem, Item, AddItem } from '../modals'
+import { AddEditListItem } from '../modals'
 import { question } from '../../../actions'
 
 import api from '../../../api'
@@ -12,7 +12,7 @@ const SectionQuestion = (props) => {
     const qDispatch = useDispatch()
     const qState = useSelector(state => state.question)
     const quState = useSelector(state => state.quiz)
-    const { AddItemTitleectName } = props
+    const { AddItemTitleName } = props
     const [addStatus, setAddStatus] = useState(false)
     const [questions, setQuestions] = useState([])
     const [quizNameList, setQuizNameList] = useState(quState.allQuiz ? quState.allQuiz.map((i) => i.Name) : [])
@@ -158,23 +158,19 @@ const SectionQuestion = (props) => {
 
     return (
         <div>
-            <AddItemTitle
+            <AddEditListItem
                 onAddHandle={handleAddQuestion}
-                AddItemTitleectName={AddItemTitleectName}
-            />
-            <AddItem 
+                addItemTitle={AddItemTitleName}
                 status={addStatus}
                 setAddStatus={setAddStatus}
-                _state={newItemState}
-                itemNew={handleNewQuestion}
-                entries={addEntries}
-            />
-            <ListItem
+                state={newItemState}
                 list={questions}
-                template={Item}
+                itemNew={handleNewQuestion}
                 itemDelete={handleDeleteQuestion}
-                itemModify={handleModifyQuestion}
+                itemModidy={handleModifyQuestion}
+                addEntries={addEntries}
                 entries={entries}
+                emptyMessage={'No questions are present'}
             />
         </div>
     )
