@@ -24,7 +24,6 @@ const Edit = styled.div.attrs({
 })`
     margin 15px 15px 15px 15px
 `
-
 const Delete = styled.div.attrs({
     className: 'btn btn-danger',
 })`

@@ -12,9 +12,7 @@ const Wrapper = styled.div.attrs({
 const Scores = () => {
     return (
         <Wrapper>
-            <SectionScore
-                AddObjectName={'Score'}
-            />
+            <SectionScore/>
         </Wrapper>
     )
 }
