@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { AddObj, ListObj, Item, AddItem } from '../modals'
+import { AddItemTitle, ListItem, Item, AddItem } from '../modals'
 import api from '../../../api'
 import { quiz } from '../../../actions'
 
@@ -8,7 +8,7 @@ import { Constant } from '../quiz'
 
 const SectionQuiz = (props) => {
     const qDispatch = useDispatch()
-    const { AddObjectName } = props  
+    const { AddItemTitleectName } = props  
     const [loading, setLoading] = useState(false)
     const [addStatus, setAddStatus] = useState(false)
     const [quizzies, setQuizzies] = useState([])
@@ -101,9 +101,9 @@ const SectionQuiz = (props) => {
 
     return (
         <div>
-            <AddObj
+            <AddItemTitle
                 onAddHandle={handleAddQuiz}
-                AddObjectName={AddObjectName}
+                AddItemTitleectName={AddItemTitleectName}
             />
             <AddItem 
                 status={addStatus}
@@ -112,7 +112,7 @@ const SectionQuiz = (props) => {
                 itemNew={handleNewQuiz}
                 entries={itemEntries}
             />
-            <ListObj
+            <ListItem
                 list={quizzies}
                 template={Item}
                 itemDelete={handleDeleteQuiz}

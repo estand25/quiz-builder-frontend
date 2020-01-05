@@ -53,8 +53,6 @@ const Profile = (props) => {
     const sDispatch = useDispatch()
     const history = useHistory()
 
-    console.log('auth', sSelector);
-
     const [username, setUserName] = useState(sSelector.username)
     const [password, setPasssword] = useState(sSelector.password)
     const [email, setEmail] = useState(sSelector.email)
@@ -80,6 +78,9 @@ const Profile = (props) => {
             }).catch(err => {
                 console.log('updateProfile', err);
                 window.alert(err)
+                setUserName('')
+                setEmail('')
+                setPasssword('')
             })
     }
 

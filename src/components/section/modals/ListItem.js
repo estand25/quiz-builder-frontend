@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListObj = (props) => {
+const ListItem = (props) => {
     const {itemDelete, itemModify, entries} = props
     return (
         <div>
@@ -17,4 +17,4 @@ const ListObj = (props) => {
     )
 }
 
-export default ListObj
+export default ListItem

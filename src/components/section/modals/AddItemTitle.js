@@ -7,12 +7,12 @@ const Add = styled.div.attrs({
     margin 15px 15px 15px 15px
 `
 
-const AddObj = (props) => {
+const AddItemTitle = (props) => {
     return (
         <Add onClick={props.onAddHandle}>
-            Add {props.AddObjectName}
+            Add {props.AddItemTitleectName}
         </Add>
     )
 }
 
-export default AddObj
+export default AddItemTitle

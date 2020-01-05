@@ -1,5 +1,5 @@
-import AddObj from './AddObj'
-import ListObj from './ListObj'
+import AddItemTitle from './AddItemTitle'
+import ListItem from './ListItem'
 import ArrayList from './ArrayList'
 import Item from './Item'
 import AddItem from './AddItem'
@@ -7,8 +7,8 @@ import ModifyItem from './ModifyItem'
 import Entry from './Entry'
 
 export {
-    AddObj,
-    ListObj,
+    AddItemTitle,
+    ListItem,
     ArrayList,
     Item,
     AddItem,

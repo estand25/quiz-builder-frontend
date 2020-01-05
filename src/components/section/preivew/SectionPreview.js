@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { SectionQuiz } from '../../components/section/quiz'
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
@@ -8,15 +7,12 @@ const Wrapper = styled.div.attrs({
     margin: 0 30px;
     border: 1px;
 `
-
-const Quizzes = () => {
+const SectionPreview = () => {
     return (
         <Wrapper>
-            <SectionQuiz
-                AddItemTitleectName={'Quiz'}
-            />
+        <div>Section Preview</div>
         </Wrapper>
     )
 }
 
-export default Quizzes
+export default SectionPreview

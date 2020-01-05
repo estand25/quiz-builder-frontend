@@ -13,7 +13,7 @@ const Questions = () => {
     return (
         <Wrapper>
             <SectionQuestion
-                AddObjectName={'Question'}
+                AddItemTitleectName={'Question'}
             />
         </Wrapper>
     )
