@@ -9,9 +9,19 @@ import configureStore from 'redux-mock-store'
 describe('Quizzes renders without crashing', () => {
     it('Quizzes does not crash on render', () => {
         const initialState = { 
-            name: '',
-            description: '',
-            status: false  
+            quiz: {
+                name: '',
+                description: '',
+                status: false  
+            },
+            auth: {
+                userId: '',
+                userLoading: false,
+                error: '',
+                email: '',
+                username: '',
+                password: ''
+            }
         }
 
         const mockStore = configureStore()

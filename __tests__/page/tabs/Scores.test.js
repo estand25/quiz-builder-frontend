@@ -9,8 +9,18 @@ import configureStore from 'redux-mock-store'
 describe('Scores renders without crashing', () => {
     it('Scores does not crash on render', () => {
         const initialState = { 
-            title: '',
-            questionCount: 0
+            score: {
+                title: '',
+                questionCount: 0
+            },
+            auth: {
+                userId: '',
+                userLoading: false,
+                error: '',
+                email: '',
+                username: '',
+                password: ''
+            }
         }
 
         const mockStore = configureStore()

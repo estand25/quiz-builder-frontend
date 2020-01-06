@@ -12,6 +12,7 @@ const SectionQuestion = (props) => {
     const qDispatch = useDispatch()
     const qState = useSelector(state => state.question)
     const quState = useSelector(state => state.quiz)
+    const qAuth = useSelector(state => state.auth)
     const { AddItemTitleName } = props
     const [addStatus, setAddStatus] = useState(false)
     const [questions, setQuestions] = useState([])
@@ -30,11 +31,15 @@ const SectionQuestion = (props) => {
     var newItemState = itemStatesGen(itemValuesGen(entries))   
 
     useEffect(
-        () => {
+        () => {            
             api.getAllQuestion()
                 .then(q => {
                     if(q.data.success === true){
-                        var question = q.data.data.map(i => (
+                        var question = q
+                            .data
+                            .data
+                            .filter((i) => i.userId == qAuth.userId)
+                            .map(i => (
                             {
                                 _id: i._id,
                                 Question: i.question,

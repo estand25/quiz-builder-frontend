@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AddEditListItem } from '../modals'
 import api from '../../../api'
 import { quiz } from '../../../actions'
@@ -8,8 +8,8 @@ import { Constant } from '../quiz'
 
 const SectionQuiz = (props) => {
     const qDispatch = useDispatch()
+    const qAuth = useSelector(state => state.auth)
     const { AddItemTitleName } = props  
-    const [loading, setLoading] = useState(false)
     const [addStatus, setAddStatus] = useState(false)
     const [quizzies, setQuizzies] = useState([])
 
@@ -19,11 +19,15 @@ const SectionQuiz = (props) => {
     entries.unshift(['_id', 'ReadOnly'])
 
     useEffect(
-        () => {
+        () => {            
             api.getAllQuiz()
                 .then(q => {
                     if(q.data.success == true){
-                        var _quiz = q.data.data.map(i => (
+                        var _quiz = q
+                            .data
+                            .data
+                            .filter((i) => i.userId == qAuth.userId)
+                            .map(i => (
                             {
                                 _id: i._id,
                                 Name: i.name,

@@ -10,7 +10,7 @@ const Wrapper = styled.div.attrs({
 const SectionPreview = () => {
     return (
         <Wrapper>
-        <div>Section Preview</div>
+            <div>Section Preview</div>
         </Wrapper>
     )
 }

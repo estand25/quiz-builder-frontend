@@ -24,6 +24,14 @@ describe('Questions renders without crashing', () => {
             },
             quiz: {
                 allQuiz: []
+            },
+            auth: {
+                userId: '',
+                userLoading: false,
+                error: '',
+                email: '',
+                username: '',
+                password: ''
             }
         }
 
