@@ -18,6 +18,10 @@ export default (state = initalState, action ) => {
                 password: action.payload.password,
                 email: action.payload.email
             }
+        case actions.SET_USER_ID_REJECT:
+            return {...state,
+                error: action.error
+            }
         default:
             return state
     }

@@ -70,6 +70,7 @@ const LogIn = (props) => {
                 console.log('signInUser', err);
                 window.alert(err)
             })
+        // sDispatch(auth.logIn(username, password))
     }
 
     const cancelSignIn = () => {
