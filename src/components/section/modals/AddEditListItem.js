@@ -1,26 +1,7 @@
 import React from 'react'
-import { AddItemTitle, ListItem, Item, AddItem, EmptyList } from '../modals'
+import { AddItemTitle, AddItem, ListOrEmpty, } from '../modals'
 
 const AddEditListItem = ({onAddHandle, addItemTitle, status, setAddStatus, state, itemNew, addEntries, list, itemDelete, itemModidy, entries, emptyMessage}) => {
-    const ListOrEmpty = () => {
-        if(list.length > 0){
-            return (
-                <ListItem
-                    list={list}
-                    template={Item}
-                    itemDelete={itemDelete}
-                    itemModidy={itemModidy}
-                    entries={entries}
-                />
-            )
-        } else {
-            return (
-                <EmptyList
-                    emptyMessage={emptyMessage}
-                />
-            )
-        }
-    }
     return (
         <div>
             <AddItemTitle
@@ -34,7 +15,13 @@ const AddEditListItem = ({onAddHandle, addItemTitle, status, setAddStatus, state
                 itemNew={itemNew}
                 entries={addEntries}
             />
-            <ListOrEmpty/>
+            <ListOrEmpty
+                list={list}
+                itemDelete={itemDelete}
+                itemModify={itemModidy}
+                entries={entries}
+                emptyMessage={emptyMessage}
+            />
         </div>
     )
 }

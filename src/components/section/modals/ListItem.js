@@ -1,10 +1,10 @@
 import React from 'react'
 
 const ListItem = (props) => {
-    const {itemDelete, itemModify, entries} = props
+    const {list, itemDelete, itemModify, entries} = props
     return (
         <div>
-            {props.list.map((i) =>
+            {list.map((i) =>
                 <props.template
                     key={i._id}
                     item_={i}
