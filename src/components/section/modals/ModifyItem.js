@@ -17,9 +17,8 @@ const Row = styled.div`
 
 const ModifyItem = (props) => {  
     var {_state, entries } = props   
-    
-    const [_state_, setState] = useState(_state) 
-
+    const [_state_, setState] = useState(_state)
+     
     const changeState = (name, value) => {
         var internalState = Object.assign({}, _state_)
         
