@@ -39,55 +39,142 @@ const Select = styled.select`
     }
 `
 
+const ExpandBtn = styled.button`
+    width: 10px;
+    height: 25px;
+    border: 1px solid black;
+    flex-direction: column;
+`
+const ExpandImage = styled.img`
+    width: 100%;
+    height: 100%;
+`
+const Submit = styled.div.attrs({
+    className: 'btn btn-outline-secondary'
+})`
+margin 15px 15px 15px 5px
+`
+
+const Cancel = styled.div.attrs({
+    className: 'btn btn-outline-danger',
+})`
+    margin 15px 15px 15px 15px
+`
+
+const BuildField = (props) => {
+    var {item, value, changeState} = props
+
+    var val = Object.values(item.Options)
+        .map(i => {
+            return Object.entries(i)[0][1]
+        })    
+
+    return ( 
+        <div>
+            <Label>{item.Question}</Label> 
+            <Select
+                value={value[item.Order]}
+                onChange={e => changeState(item.Order, e.target.value)}
+            >
+                <option value="" hidden>
+                    - Select One -
+                </option>
+                {Object.values(val).map((i) =>                             
+                    <option key={i} value={i}>
+                        {i}
+                    </option>
+                )} 
+            </Select>
+        </div>    
+    )
+}
+
 //https://codeburst.io/animating-react-components-with-css-and-styled-components-cc5a0585f105
 const BuildItem = (props) => {
-    console.log('BuildItem', props);
-    
+    var {State} = props
     const [expand, setExpand] = useState(false)
+    const [_state_, setState] = useState(State)
+
+    const changeState = (name, value) => {        
+        var internalState = Object.assign({}, State)
+
+        Object.getOwnPropertyNames(State)
+            .forEach(val => {
+                if(val == name){
+                    internalState[name] = value
+                }
+            })
+            State = Object.assign(State, internalState)
+            setState(internalState)
+    }
+
+    const ExpandButton = (props) => {
+        if(props.length > 0){
+            return (
+                <div>
+                    <Submit>
+                        {'Submit'}
+                    </Submit>
+                    <Cancel onClick={() => props.setExpand(!expand)}>
+                        {'Cancel'}
+                    </Cancel>
+                </div>
+            )
+        } else {
+            return (
+                <></>
+            )
+        }
+    }
 
     const ExpandLabel = () => {
         if(expand){
             return (
                 <div>
-                    <Label>{'Quiz Name: ' + props.Name}</Label>
-                    {props.Questions.map((item, index) => 
+                    <ExpandBtn onClick={() => setExpand(!expand)}>
+                        <ExpandImage
+                            src='https://img.icons8.com/flat_round/64/000000/arrow--v1.png'   
+                        />
+                    </ExpandBtn>
+                    <Label>{props.Name}</Label>
+                    {props.Questions.sort((i) => {return i.sort}).map((item, index) =>
                         <Row key={index}>
-                            <Label>{item.Question}</Label> 
-                            <Select
-                                value={''}
-                                onChange={e => e.target.value}
-                            >
-                                <option value="" hidden>
-                                    - Select One -
-                                </option>
-                                {Object.values(item.Options).map((index_, item_) =>                             
-                                    <option key={index_} value={item_}>
-                                        {item_[0]}
-                                    </option>
-                                )}
-                            </Select>    
+                            <BuildField
+                                item={item}
+                                value={_state_}
+                                changeState={(n,v) => changeState(n,v)}
+                            />
                         </Row>
                     )}
+                    <ExpandButton
+                        length={props.Questions.length}
+                        setExpand={() => setExpand(!expand)}
+                    />
                 </div>
-            //{item_[0]}
             )
         } else {
             return (
                 <div>
-                    <Label>{'Quiz Name: ' + props.Name}</Label>
+                    <ExpandBtn onClick={() => setExpand(!expand)}>
+                        <ExpandImage
+                            src='https://img.icons8.com/flat_round/64/000000/arrow--v1.png'   
+                        />
+                    </ExpandBtn>
+                    <Label>{props.Name}</Label>
                 </div>
             )
         }
     }
 
     return (
-        <div onClick={() => setExpand(!expand)}>
+        <div>
             <ExpandLabel/>
         </div>
     )
 }
 
 const BuildList = ({quizzies, questions}) => {
+    
     var buildList = []
     for(var a = 0; a < quizzies.length ; a++){
         var buildItem = {}
@@ -97,11 +184,14 @@ const BuildList = ({quizzies, questions}) => {
         buildItem.Description = quizzies[a].Description
         buildItem.Status = quizzies[a].Status
         buildItem.Questions = []
+        buildItem.State = {}
         
         for(var b = 0; b < questions.length; b++){
             var questionItem = {}
+            var _state_ = {}
 
-            if(quizzies[a].Name == questions[b].Quiz){     
+            if(quizzies[a].Name == questions[b].Quiz){   
+                _state_[questions[b].Order] = ""                  
                 questionItem._id = questions[b]._id
                 questionItem.Question = questions[b].Question
                 questionItem.Options = questions[b].Options
@@ -112,6 +202,7 @@ const BuildList = ({quizzies, questions}) => {
 
                 buildItem.Questions.push(questionItem)
             }
+            buildItem.State = Object.assign(buildItem.State,_state_)
         }
 
         buildList.push(buildItem)
@@ -176,6 +267,8 @@ const SectionPreview = () => {
                         setQuestions(_question)
                     }
                 })
+            
+            
         },[]
     )
 

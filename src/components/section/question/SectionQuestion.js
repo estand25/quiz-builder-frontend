@@ -148,7 +148,8 @@ const SectionQuestion = (props) => {
             order: parseInt(Order),
             point: parseInt(Point),
             quizName: Quiz,
-            quizId: quizList.filter(i => i.name == Quiz)[0]._id
+            quizId: quizList.filter(i => i.name == Quiz)[0]._id,
+            userId:  qAuth.userId
         }
 
         api.insertQuestion(payload)
