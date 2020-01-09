@@ -109,13 +109,15 @@ const BuildItem = (props) => {
     }
 
     const ExpandButton = (props) => {
-        if(props.length > 0){
+        const { length, setExpand } = props
+        
+        if(length > 0){
             return (
                 <div>
                     <Submit>
                         {'Submit'}
                     </Submit>
-                    <Cancel onClick={() => props.setExpand(!expand)}>
+                    <Cancel onClick={() => setExpand(!expand)}>
                         {'Cancel'}
                     </Cancel>
                 </div>
