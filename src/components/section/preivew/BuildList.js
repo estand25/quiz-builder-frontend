@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
-
+import { useSelector } from 'react-redux'
+import { buildList } from '../../../actions'
 import { BuildItem } from '../preivew'
 
 const Wrapper = styled.div`
@@ -9,53 +10,40 @@ const Wrapper = styled.div`
     margin: 10px;
 `
 
-const BuildList = ({quizzies, questions}) => {
-    var buildList = []
-    for(var a = 0; a < quizzies.length ; a++){
-        var buildItem = {}
+const BuildList = () => {
+    const qBuild = useSelector(state => state.buildlist)
+    const [buildList_, setBuildList] = useState([])
 
-        buildItem._id = quizzies[a]._id
-        buildItem.Name = quizzies[a].Name
-        buildItem.Description = quizzies[a].Description
-        buildItem.Status = quizzies[a].Status
-        buildItem.Questions = []
-        buildItem.State = {}
-        
-        for(var b = 0; b < questions.length; b++){
-            var questionItem = {}
-            var _state_ = {}
-
-            if(quizzies[a].Name == questions[b].Quiz){   
-                _state_[questions[b].Order] = ""                  
-                questionItem._id = questions[b]._id
-                questionItem.Question = questions[b].Question
-                questionItem.Options = questions[b].Options
-                questionItem.Answer = questions[b].Answer
-                questionItem.Status = questions[b].Status
-                questionItem.Order = questions[b].Order
-                questionItem.Point = questions[b].Point
-
-                buildItem.Questions.push(questionItem)
-            }
-            buildItem.State = Object.assign(buildItem.State,_state_)
+    useEffect(
+        () => { 
+            setBuildList(qBuild.previewList)
+        },[]
+    )
+    
+    const Render = () => {
+        if(buildList_.length == 0){
+            return (
+                <div>
+                    Loading...
+                </div>
+            )
+        } else {
+            return (
+                <Wrapper>
+                    {buildList_.map((i) => 
+                        <div key={i._id}>
+                            <BuildItem
+                                {...i}
+                            /> 
+                        </div>
+                    )}
+                </Wrapper>
+            )
         }
-
-        buildList.push(buildItem)
-    }    
+    }
 
     return (
-        <Wrapper>
-            {buildList.length > 0 ?
-            buildList.map((i) => 
-                <div key={i._id}>
-                    {/* {i.Questions.length > 0 ? */}
-                    <BuildItem
-                        {...i}
-                    /> 
-                    {/* : <></> } */}
-                </div>
-            ) : ''}
-        </Wrapper>
+        <Render />
     )
 }
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { BuildField, BuildSubmitBtn } from '../preivew'
 import styled from 'styled-components'
 
@@ -27,23 +27,23 @@ const ExpandImage = styled.img`
 
 const BuildItem = (props) => {
     var {State} = props
-    // console.log('State start', props.State);
+    console.log('State start', props.State);
     
     const [expand, setExpand] = useState(false)
-    const [_state_, setState] = useState(State)
+    var [_state_, setState] = useState(State)
 
     const changeState = (name, value) => {        
         console.log('ChangeState', name);  
         console.log('ChangeState', value);
         
-        var internalState = Object.assign({}, _state_ ? State : _state_)
+        var internalState = Object.assign({}, _state_)
         console.log('ChangeState', internalState);
         // console.log('ChangeState', State);
 
         Object.getOwnPropertyNames(_state_)
             .forEach(val => {
-                // console.log('val', val);
-                // console.log('name', name);
+                console.log('val', val);
+                console.log('name', name);
                 // console.log('value', value);
                 
                 if(val == name){

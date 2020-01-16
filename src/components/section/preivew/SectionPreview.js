@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import apis from '../../../api'
+import { buildList } from '../../../actions'
 import { BuildList } from '../preivew'
 
 const SectionPreview = () => {
-    const [quizzies, setQuizzies] = useState([])
-    const [questions, setQuestions] = useState([])
-    const [buildQuiz, setBuildQuiz] = useState([])
+    const qDispatch = useDispatch()
 
     useEffect(
         () => {
@@ -23,7 +23,7 @@ const SectionPreview = () => {
                                     Status: i.status == 1 ? 'On' : 'Off'
                                 }
                             ))
-                        setQuizzies(_quiz)
+                        qDispatch(buildList.setBuildListQuiz(_quiz))
                     }
                 })
             
@@ -45,20 +45,15 @@ const SectionPreview = () => {
                                     Quiz: i.quizName
                                 }
                             ))
-                        setQuestions(_question)
+                        qDispatch(buildList.setBuildListQuestion(_question))
                     }
                 })
-            
-            
         },[]
     )
 
     return (
         <div>
-            <BuildList
-                quizzies={quizzies}
-                questions={questions}
-            />
+           <BuildList /> 
         </div>
     )
 }

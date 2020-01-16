@@ -7,6 +7,7 @@ import auth from './auth'
 import question from './question'
 import quiz from './quiz'
 import score from './score'
+import buildlist from './buildlist'
 
 const combinePersistConfig = {
     key: 'root',
@@ -22,6 +23,7 @@ const authPersistConfig = {
 
 const rootReducer = combineReducers({
     auth: persistReducer(authPersistConfig, auth),
+    buildlist,
     question,
     quiz,
     score
