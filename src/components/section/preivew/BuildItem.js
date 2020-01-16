@@ -25,34 +25,45 @@ const ExpandImage = styled.img`
     height: 100%;
 `
 
+const VerifyResponse = (state, questionList) => {
+    console.log('VerifyResponse onSubmit', state);
+    console.log('VerifyResponse onSubmit', questionList);
+    
+    if(state == {}){
+        window.alert('You have not responsed to any of the questions. Please response.')
+    }
+    var score = 0
+    Object.getOwnPropertyNames(state)
+        .forEach(val => {
+            // console.log('User Response All', questionList[val-1]);
+            console.log('User Response Answer', questionList[val-1].Answer);
+            console.log('User Response Response', state[val]);
+
+            if(questionList[val-1].Answer == state[val]){
+                console.log('Points', questionList[val-1].Point);
+                score = score + questionList[val-1].Point
+            }
+        })
+
+    console.log('User Response Score', score);
+   //https://upmostly.com/tutorials/modal-components-react-custom-hooks
+   //Not sure I will use hook, but everything else maybe 
+}
+
 const BuildItem = (props) => {
     var {State} = props
-    console.log('State start', props.State);
     
     const [expand, setExpand] = useState(false)
     var [_state_, setState] = useState(State)
 
-    const changeState = (name, value) => {        
-        console.log('ChangeState', name);  
-        console.log('ChangeState', value);
-        
+    const changeState = (name, value) => {      
         var internalState = Object.assign({}, _state_)
-        console.log('ChangeState', internalState);
-        // console.log('ChangeState', State);
-
-        Object.getOwnPropertyNames(_state_)
+        Object.getOwnPropertyNames(State)
             .forEach(val => {
-                console.log('val', val);
-                console.log('name', name);
-                // console.log('value', value);
-                
                 if(val == name){
                     internalState[name] = value
-                    console.log('InternalState', internalState);
                 }
             })
-            // _state_ = Object.assign(_state_, internalState)
-
             setState(internalState)
     }
 
@@ -76,25 +87,14 @@ const BuildItem = (props) => {
                     <BuildSubmitBtn
                         length={props.Questions.length}
                         setExpand={() => setExpand(!expand)}
-                        onSubmit={() => {
-                            console.log('onSubmit state', _state_); 
-                            console.log('onSubmit questions', props.Questions);
-
-                            if(_state_ == {}){
-                                window.alert('You have not responsed to any of the questions. Please response.')
-                            }
-                    }}
+                        onSubmit={() => VerifyResponse(_state_, props.Questions)}
                     />
                 </div>
             )
         } else {
             return (
                 <div>
-                    <ExpandBtn onClick={() => {setExpand(!expand); State = {}; setState({}); }}>
-                        <ExpandImage
-                            src='https://img.icons8.com/flat_round/64/000000/arrow--v1.png'   
-                        />
-                    </ExpandBtn>
+                    <ExpandBtn onClick={() => {setExpand(!expand); State = {}; setState({}); }}/>
                     <Label>{props.Name}</Label>
                 </div>
             )
