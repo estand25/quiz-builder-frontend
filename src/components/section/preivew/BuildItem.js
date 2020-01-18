@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { BuildField, BuildSubmitBtn } from '../preivew'
 import styled from 'styled-components'
+import Modal from 'react-bootstrap/Modal'
 
 const Label = styled.label`
     margin: 1px;
@@ -20,12 +21,10 @@ const ExpandBtn = styled.button`
     border: 1px solid black;
     flex-direction: column;
 `
-const ExpandImage = styled.img`
-    width: 100%;
-    height: 100%;
-`
 
-const VerifyResponse = (state, questionList) => {
+
+
+const VerifyResponse = (state, questionList, setShow) => {
     console.log('VerifyResponse onSubmit', state);
     console.log('VerifyResponse onSubmit', questionList);
     
@@ -46,13 +45,36 @@ const VerifyResponse = (state, questionList) => {
         })
 
     console.log('User Response Score', score);
+    if(score > 0)   
+        setShow()
    //https://upmostly.com/tutorials/modal-components-react-custom-hooks
    //Not sure I will use hook, but everything else maybe 
+}
+
+const DispalyAlert = ({show, onHide, body, onSubmit, setShow}) => {
+    return (
+        <Modal show={show} onHide={onHide} animation={false}>
+            <Modal.Header closeButton>
+                <Modal.Title>Preview Result</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {body}
+            </Modal.Body>
+            <Modal.Footer>
+                <BuildSubmitBtn
+                    length={1}
+                    setExpand={setShow}
+                    onSubmit={onSubmit}
+                />
+            </Modal.Footer>
+        </Modal>
+    )
 }
 
 const BuildItem = (props) => {
     var {State} = props
     
+    const [show, setShow] = useState(false)
     const [expand, setExpand] = useState(false)
     var [_state_, setState] = useState(State)
 
@@ -87,7 +109,14 @@ const BuildItem = (props) => {
                     <BuildSubmitBtn
                         length={props.Questions.length}
                         setExpand={() => setExpand(!expand)}
-                        onSubmit={() => VerifyResponse(_state_, props.Questions)}
+                        onSubmit={() => VerifyResponse(_state_, props.Questions, () => setShow(!show))}
+                    />
+                    <DispalyAlert
+                        show={show}
+                        onHide={() => setShow(!show)}
+                        body={'Score: '}
+                        setShow={() => setShow(!show)}
+                        onSubmit={() => ''}
                     />
                 </div>
             )

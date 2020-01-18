@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { buildList } from '../../../actions'
 import { BuildItem } from '../preivew'
 
 const Wrapper = styled.div`
