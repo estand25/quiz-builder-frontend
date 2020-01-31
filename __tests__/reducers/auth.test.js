@@ -1,13 +1,15 @@
 import {auth} from '../../src/actions'
 import auth_ from '../../src/reducers/auth'
-import {actions} from '../../src/actions/type'
 
 describe('auth reducers with inital state', () => {
     it('should return the inital state', () => {
         const initalState = {
             userId: '',
             userLoading: false,
-            error: ''
+            error: '',
+            username: '',
+            password: '',
+            email: ''
         }
         expect(auth_(undefined, {})).toEqual(initalState)
     })
@@ -15,63 +17,37 @@ describe('auth reducers with inital state', () => {
 
 describe('auth reducers set user id', () => {
     it('should set user with something', () => {
+        var payload = {
+            userId: '123456789',
+            username: 'd1',
+            password: 'd1w'
+        }
+
         expect(
-            auth_([], auth.setUserId('123456789'))
+            auth_([], auth.setUser(payload))
         ).toEqual(
             {
-                userId: '123456789'
+                userId: '123456789',
+                username: 'd1',
+                password: 'd1w'
             }
         )
     })
 
     it('should set user with nothing', () => {
-        expect(
-            auth_([], auth.setUserId(''))
-        ).toEqual(
-            {
-                userId: ''
-            }
-        )
-    })
+        var payload = {
+            userId: '',
+            username: '',
+            password: ''
+        }
 
-    it('should set user id pending to true', () =>{
         expect(
-            auth_([], auth.GetUserId(true))
+            auth_([], auth.setUser(payload))
         ).toEqual(
             {
-                userLoading: true
-            }
-        )
-    })
-
-    it('should set user id pending to false', () =>{
-        expect(
-            auth_([], auth.GetUserId(false))
-        ).toEqual(
-            {
-                userLoading: false
-            }
-        )
-    })
-
-    it('should set user if full filled with data', () => {
-        expect(
-            auth_([], auth.GetUserIdFullFilled({a:'a'}))
-        ).toEqual(
-            {
-                userLoading: false,
-                userId: {a:'a'}
-            }
-        )
-    })
-
-    it('should set user if reject with data', () => {
-        expect(
-            auth_([], auth.GetUserIdReject({a:'a'}))
-        ).toEqual(
-            {
-                userLoading: false,
-                error: {a:'a'}
+                userId: '',
+                username: '',
+                password: ''
             }
         )
     })

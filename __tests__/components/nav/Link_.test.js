@@ -8,11 +8,16 @@ import configureStore from 'redux-mock-store'
 
 describe('Link_ renders without crashing', () => {
     it('Link_ does not crash on render', () => {
-        const initialState = { 
+        const auth = {
             userId: '',
             userLoading: false,
             error: ''
         }
+
+        const initialState = {
+            auth: auth 
+        }
+
         const mockStore = configureStore()
         let store
 

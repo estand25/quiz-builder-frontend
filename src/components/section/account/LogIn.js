@@ -30,14 +30,14 @@ const Spacing = styled.div`
     padding: 5px;
 `
 
-const Button = styled.button.attrs({
-    className: 'btn btn-primary',
+const SuccessButton = styled.button.attrs({
+    className: 'btn btn-success',
 })`
     margin: 15px 15px 15px 15px;
 `
 
 const CancelButton = styled.button.attrs({
-    className: 'btn btn-danger',
+    className: 'btn btn-primary',
 })`
     margin: 15px 15px 15px 15px;
 `
@@ -48,7 +48,7 @@ const LogIn = (props) => {
     const sDispatch = useDispatch()
     const history = useHistory()
 
-    const createUser = () => {
+    const signInUser = () => {
         const payload = {
             username: username,
             password: password
@@ -57,15 +57,25 @@ const LogIn = (props) => {
         api.SignInUser(payload)
             .then(res => {
                 if(res.data.success === true){
-                    var user = res.data.data                    
-                    sDispatch(auth.setUserId(user._id))
-                    window.alert('User Logged in successfully !!')
+                    var user = res.data.data    
+                    payload.userId = user._id
+                    payload.email = user.email
+
+                    sDispatch(auth.setUser(payload))
+
+                    window.alert('User logged in successfully !!')
                     history.push('/about')
                 }
             }).catch(err => {
-                console.log('SignInUser', err);
+                console.log('signInUser', err);
                 window.alert(err)
             })
+        // sDispatch(auth.logIn(username, password))
+    }
+
+    const cancelSignIn = () => {
+        window.alert('User cancel logged in successfully !!')
+        history.push('/about')
     }
 
     return (
@@ -87,8 +97,8 @@ const LogIn = (props) => {
                     onChange={p => setPasssword(p.target.value)}
                 />
             </Spacing>
-            <Button onClick={createUser}>Log-In</Button>
-            <CancelButton href={props.onLogInCancel}>Cancel</CancelButton>
+            <SuccessButton onClick={signInUser}>Log-In</SuccessButton>
+            <CancelButton onClick={cancelSignIn}>Cancel</CancelButton>
         </Wrapper>
     )
 }

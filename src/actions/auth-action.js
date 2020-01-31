@@ -1,23 +1,36 @@
 import { actions } from './type'
+import api from '../api'
 
-export const setUserId = userId => ({
+export const setUser = (data) => ({
     type: actions.SET_USER_ID,
-    userId
+    payload: data
 })
 
-export const GetUserId = (bool) => ({
-    type: actions.GET_USER_ID_PENDING,
-    loading: bool
+export const setUserReject = (data) => ({
+    type: actions.SET_USER_ID_REJECT,
+    error: data
 })
 
-export const GetUserIdFullFilled = (data) => ({
-    type: actions.GET_USER_ID_FULLFILLED,
-    payload: data,
-    loading: false
-})
+export const logIn = (username, password) => {
+    return async dispatch => {
+        dispatch(setUser(''))
 
-export const GetUserIdReject = (error) => ({
-    type: actions.GET_USER_ID_REJECT,
-    payload: error,
-    loading: false
-})
+        const payload = {
+            username: username,
+            password: password
+        }
+
+        api.SignInUser(payload)
+            .then(res => {
+                if(res.data.success === true){
+                    var user = res.data.data    
+                    payload.userId = user._id
+                    payload.email = user.email
+
+                    dispatch(setUser(payload))
+                }
+            }).catch(err => {
+                dispatch(setUserReject(err))
+            })
+    }
+}

@@ -8,11 +8,16 @@ import configureStore from 'redux-mock-store'
 
 describe('NavBar renders without crashing', () => {
     it('NavBar does not crash on render', () => {
-        const initialState = { 
+        const auth = {
             userId: '',
             userLoading: false,
             error: ''
         }
+
+        const initialState = {
+            auth: auth 
+        }
+
         const mockStore = configureStore()
         let store = mockStore(initialState)
         
