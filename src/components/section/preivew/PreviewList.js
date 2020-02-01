@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { BuildItem } from '../preivew'
+import { PreviewItem } from '../preivew'
 
 const Wrapper = styled.div`
     padding: 5px 5px 5px 5px;
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     margin: 10px;
 `
 
-const BuildList = () => {
+const PreviewList = () => {
     const qBuild = useSelector(state => state.buildlist)
     const [buildList_, setBuildList] = useState([])
 
@@ -31,7 +31,7 @@ const BuildList = () => {
                 <Wrapper>
                     {buildList_.map((i) => 
                         <div key={i._id}>
-                            <BuildItem
+                            <PreviewItem
                                 {...i}
                             /> 
                         </div>
@@ -46,4 +46,4 @@ const BuildList = () => {
     )
 }
 
-export default BuildList
+export default PreviewList

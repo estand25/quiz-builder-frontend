@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import apis from '../../../api'
 import { buildList } from '../../../actions'
-import { BuildList } from '../preivew'
+import { PreviewList } from '../preivew'
 
 const SectionPreview = () => {
     const qDispatch = useDispatch()
@@ -53,7 +53,7 @@ const SectionPreview = () => {
 
     return (
         <div>
-           <BuildList /> 
+           <PreviewList /> 
         </div>
     )
 }

@@ -1,15 +1,11 @@
 import SectionPreview from './SectionPreview'
 import Constant from './Constant'
-import BuildField from './BuildField'
-import BuildItem from './BuildItem'
-import BuildList from './BuildList'
-import BuildSubmitBtn from './BuildSubmitBtn'
+import PreviewItem from './PreviewItem'
+import PreviewList from './PreviewList'
 
 export {
-    BuildField,
-    BuildItem,
-    BuildList,
-    BuildSubmitBtn,
+    SectionPreview,
     Constant,
-    SectionPreview
+    PreviewItem,
+    PreviewList
 }
