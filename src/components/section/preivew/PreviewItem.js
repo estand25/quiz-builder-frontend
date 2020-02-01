@@ -1,19 +1,11 @@
-import React, {useState, useEffect} from 'react'
-import { BuildField, DisplayAlert, VerifyResponse, BuildSubmitBtn, BuildFieldArea } from '../preivew'
+import React, {useState} from 'react'
+import { DisplayAlert, VerifyResponse, BuildSubmitBtn, BuildFieldArea } from '../modals'
 import styled from 'styled-components'
 
 const Label = styled.label`
     margin: 1px;
     font-size: 20px;
 `
-const Row = styled.div`
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
-`
-
 const ExpandBtn = styled.button`
     width: 10px;
     height: 25px;

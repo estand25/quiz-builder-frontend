@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BuildField } from '../preivew'
+import { BuildField } from '../modals'
 
 const Row = styled.div`
     margin: 5px;

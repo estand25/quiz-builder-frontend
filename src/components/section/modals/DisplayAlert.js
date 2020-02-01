@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal'
-import { DecodeBodyObject, BuildSubmitBtn } from '../preivew'
+import { DecodeBodyObject, BuildSubmitBtn } from '../modals'
 
 const DisplayAlert = ({show, onHide, title,  body, onSubmit, setShow}) => {
     return (
