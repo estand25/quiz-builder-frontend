@@ -1,18 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const Wrapper = styled.div.attrs({
-    className: 'form-group',
-})`
-    margin: 0 30px;
-    border: 1px;
-`
+import {SectionBuild} from '../../components/section/build'
 
 const Build = () => {
     return (
-        <Wrapper>
-            <div>Build</div>
-        </Wrapper>
+        <SectionBuild />
     )
 }
 
