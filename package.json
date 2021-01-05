@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/estand25/quiz-builder-frontend#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "local-storage": "^2.0.0",
     "lodash": "^4.17.15",
